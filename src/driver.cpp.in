@@ -1,0 +1,26 @@
+#include "GeneratedCodeWrapper.h"
+#include "@MDL_NAME@.h"
+
+int main()
+{
+    wbt::GeneratedCodeWrapper<@MDL_NAME@ModelClass> model;
+
+    if (!model.initialize()) {
+        std::cout << model.getErrors();
+        return EXIT_FAILURE;
+    }
+
+    while (true) {
+        bool ok = model.step();
+
+        if (!ok) {
+            std::cout << model.getErrors();
+            break;
+        }
+    }
+
+    if (!model.terminate()) {
+        std::cout << model.getErrors();
+        return EXIT_FAILURE;
+    }
+}
