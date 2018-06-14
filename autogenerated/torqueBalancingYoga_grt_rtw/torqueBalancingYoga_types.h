@@ -7,14 +7,14 @@
  *
  * Code generation for model "torqueBalancingYoga".
  *
- * Model version              : 1.3253
+ * Model version              : 1.3247
  * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C++ source code generated on : Wed May 23 14:31:10 2018
+ * C++ source code generated on : Thu Jun 14 15:19:54 2018
  *
  * Target selection: grt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
  * Embedded hardware selection: 32-bit Generic
- * Code generation objectives: Unspecified
+ * Code generation objective: Debugging
  * Validation result: Not run
  */
 
@@ -22,8 +22,8 @@
 #define RTW_HEADER_torqueBalancingYoga_types_h_
 #include "rtwtypes.h"
 #include "multiword_types.h"
-#ifndef DEFINED_TYPEDEF_FOR_struct_nKwr8yfDbWZ5195E5duazE_
-#define DEFINED_TYPEDEF_FOR_struct_nKwr8yfDbWZ5195E5duazE_
+#ifndef DEFINED_TYPEDEF_FOR_struct_hu1Fw0wiIZUzALhhiDLesH_
+#define DEFINED_TYPEDEF_FOR_struct_hu1Fw0wiIZUzALhhiDLesH_
 
 typedef struct
 {
@@ -37,6 +37,7 @@ typedef struct
     boolean_T SAVE_WORKSPACE;
     real_T Ts;
     boolean_T ON_GAZEBO;
+    boolean_T SATURATE_TORQUE_DERIVATIVE;
     boolean_T USE_MOTOR_REFLECTED_INERTIA;
     boolean_T INCLUDE_COUPLING;
     boolean_T USE_IMU4EST_BASE;
@@ -49,6 +50,7 @@ typedef struct
     boolean_T DEMO_MOVEMENTS;
     boolean_T SMOOTH_COM_DES;
     boolean_T SMOOTH_JOINT_DES;
+    real_T tauDot_maxAbs;
     real_T noOscillationTime;
     real_T directionOfOscillation[3];
     real_T amplitudeOfOscillation;
@@ -57,7 +59,7 @@ typedef struct
     real_T I_m[529];
     real_T T[529];
     real_T K_ff;
-} struct_nKwr8yfDbWZ5195E5duazE;
+} struct_hu1Fw0wiIZUzALhhiDLesH;
 
 #endif
 

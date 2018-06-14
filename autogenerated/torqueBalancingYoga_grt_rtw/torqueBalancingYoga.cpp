@@ -7,14 +7,14 @@
  *
  * Code generation for model "torqueBalancingYoga".
  *
- * Model version              : 1.3253
+ * Model version              : 1.3247
  * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C++ source code generated on : Wed May 23 14:31:10 2018
+ * C++ source code generated on : Thu Jun 14 15:19:54 2018
  *
  * Target selection: grt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
  * Embedded hardware selection: 32-bit Generic
- * Code generation objectives: Unspecified
+ * Code generation objective: Debugging
  * Validation result: Not run
  */
 
@@ -746,6 +746,7 @@ void torqueBalancin_MATLABFunction_l(const real_T rtu_s[12],
  * System initialize for atomic system:
  *    '<S38>/MATLAB Function'
  *    '<S69>/MATLAB Function'
+ *    '<S157>/MATLAB Function'
  */
 void torqueBa_MATLABFunction_mb_Init(DW_MATLABFunction_torqueBal_l_T* localDW)
 {
@@ -756,6 +757,7 @@ void torqueBa_MATLABFunction_mb_Init(DW_MATLABFunction_torqueBal_l_T* localDW)
  * Output and update for atomic system:
  *    '<S38>/MATLAB Function'
  *    '<S69>/MATLAB Function'
+ *    '<S157>/MATLAB Function'
  */
 void torqueBalancin_MATLABFunction_k(const real_T rtu_s[23],
                                      B_MATLABFunction_torqueBala_j_T* localB,
@@ -809,7 +811,7 @@ void torqueBalancin_MATLABFunction_a(const real_T rtu_s[3],
 }
 
 /* Function for MATLAB Function: '<S111>/(transpose(T*Gamma))^{-1}*I_m*(T*Gamma)^{-1}' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xswap_g(real_T x[529],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xswap_p(real_T x[529],
                                                                 int32_T ix0,
                                                                 int32_T iy0)
 {
@@ -829,7 +831,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xswap_g(real_T x[529],
 }
 
 /* Function for MATLAB Function: '<S111>/(transpose(T*Gamma))^{-1}*I_m*(T*Gamma)^{-1}' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xgetrf_m(real_T A[529],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xgetrf_f(real_T A[529],
                                                                  int32_T ipiv[23],
                                                                  int32_T* info)
 {
@@ -865,7 +867,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xgetrf_m(real_T A[529],
         if (A[(c + jA) - 1] != 0.0) {
             if (jA - 1 != 0) {
                 ipiv[j] = j + jA;
-                torqueBalancingYoga_xswap_g(A, j + 1, j + jA);
+                torqueBalancingYoga_xswap_p(A, j + 1, j + jA);
             }
 
             jA = (c - j) + 23;
@@ -901,7 +903,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xgetrf_m(real_T A[529],
 }
 
 /* Function for MATLAB Function: '<S111>/(transpose(T*Gamma))^{-1}*I_m*(T*Gamma)^{-1}' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_l(const real_T A[529], real_T B[529])
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_h(const real_T A[529], real_T B[529])
 {
     real_T temp;
     int32_T jBcol;
@@ -933,7 +935,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_l(const real_T A[5
 }
 
 /* Function for MATLAB Function: '<S111>/(transpose(T*Gamma))^{-1}*I_m*(T*Gamma)^{-1}' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_lc(const real_T A[529], real_T B[529])
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_hm(const real_T A[529], real_T B[529])
 {
     int32_T jAcol;
     int32_T jBcol;
@@ -958,7 +960,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_lc(const real_T A[
 }
 
 /* Function for MATLAB Function: '<S111>/(transpose(T*Gamma))^{-1}*I_m*(T*Gamma)^{-1}' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_mrdivide_g(const real_T A[529],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_mrdivide_f(const real_T A[529],
                                                                    const real_T B[529],
                                                                    real_T y[529])
 {
@@ -968,10 +970,10 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_mrdivide_g(const real_T 
     real_T temp;
     int32_T xi;
     memcpy(&torqueBalancingYoga_B.b_A_p[0], &B[0], 529U * sizeof(real_T));
-    torqueBalancingYoga_xgetrf_m(torqueBalancingYoga_B.b_A_p, ipiv, &info);
+    torqueBalancingYoga_xgetrf_f(torqueBalancingYoga_B.b_A_p, ipiv, &info);
     memcpy(&y[0], &A[0], 529U * sizeof(real_T));
-    torqueBalancingYoga_xtrsm_l(torqueBalancingYoga_B.b_A_p, y);
-    torqueBalancingYoga_xtrsm_lc(torqueBalancingYoga_B.b_A_p, y);
+    torqueBalancingYoga_xtrsm_h(torqueBalancingYoga_B.b_A_p, y);
+    torqueBalancingYoga_xtrsm_hm(torqueBalancingYoga_B.b_A_p, y);
     for (info = 21; info >= 0; info--) {
         if (info + 1 != ipiv[info]) {
             jp = ipiv[info] - 1;
@@ -1149,7 +1151,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_eye(real_T I[16])
 }
 
 /* Function for MATLAB Function: '<S34>/stateMachineYogaFCN' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xgetrf_f(real_T A[16],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xgetrf_k(real_T A[16],
                                                                  int32_T ipiv[4],
                                                                  int32_T* info)
 {
@@ -1239,7 +1241,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xgetrf_f(real_T A[16],
 }
 
 /* Function for MATLAB Function: '<S34>/stateMachineYogaFCN' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_mrdivide_l(real_T A[16], const real_T B[16])
+void torqueBalancingYogaModelClass::torqueBalancingYoga_mrdivide_d(real_T A[16], const real_T B[16])
 {
     real_T b_A[16];
     int32_T ipiv[4];
@@ -1250,7 +1252,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_mrdivide_l(real_T A[16],
     int32_T kBcol;
     int32_T k;
     memcpy(&b_A[0], &B[0], sizeof(real_T) << 4U);
-    torqueBalancingYoga_xgetrf_f(b_A, ipiv, &info);
+    torqueBalancingYoga_xgetrf_k(b_A, ipiv, &info);
     for (info = 0; info < 4; info++) {
         jBcol = info << 2;
         jAcol = info << 2;
@@ -1305,14 +1307,14 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_mrdivide_l(real_T A[16],
 }
 
 /* Function for MATLAB Function: '<S34>/stateMachineYogaFCN' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_mldivide_a(const real_T A[16], real_T B[4])
+void torqueBalancingYogaModelClass::torqueBalancingYoga_mldivide_n(const real_T A[16], real_T B[4])
 {
     real_T temp;
     real_T b_A[16];
     int32_T ipiv[4];
     int32_T info;
     memcpy(&b_A[0], &A[0], sizeof(real_T) << 4U);
-    torqueBalancingYoga_xgetrf_f(b_A, ipiv, &info);
+    torqueBalancingYoga_xgetrf_k(b_A, ipiv, &info);
     if (ipiv[0] != 1) {
         temp = B[0];
         B[0] = B[ipiv[0] - 1];
@@ -1402,7 +1404,7 @@ real_T torqueBalancingYogaModelClass::torqueBalancingYoga_norm(const real_T x[6]
 }
 
 /* Function for MATLAB Function: '<S34>/stateMachineYogaFCN' */
-real_T torqueBalancingYogaModelClass::torqueBalancingYoga_norm_p(const real_T x[2])
+real_T torqueBalancingYogaModelClass::torqueBalancingYoga_norm_i(const real_T x[2])
 {
     real_T y;
     real_T scale;
@@ -1434,7 +1436,7 @@ real_T torqueBalancingYogaModelClass::torqueBalancingYoga_norm_p(const real_T x[
 }
 
 /* Function for MATLAB Function: '<S65>/Compute Base Velocity' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_mldivide_m(const real_T A[36], real_T B[72])
+void torqueBalancingYogaModelClass::torqueBalancingYoga_mldivide_f(const real_T A[36], real_T B[72])
 {
     int32_T ip;
     real_T b_A[36];
@@ -1676,7 +1678,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xswap(real_T x[529],
 }
 
 /* Function for MATLAB Function: '<S15>/Add motor reflected inertias' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xgetrf_l(real_T A[529],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xgetrf_a(real_T A[529],
                                                                  int32_T ipiv[23],
                                                                  int32_T* info)
 {
@@ -1780,7 +1782,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm(const real_T A[529
 }
 
 /* Function for MATLAB Function: '<S15>/Add motor reflected inertias' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_d(const real_T A[529], real_T B[529])
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_j(const real_T A[529], real_T B[529])
 {
     int32_T jAcol;
     int32_T jBcol;
@@ -1815,10 +1817,10 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_mrdivide(const real_T A[
     real_T temp;
     int32_T xi;
     memcpy(&torqueBalancingYoga_B.b_A_k[0], &B[0], 529U * sizeof(real_T));
-    torqueBalancingYoga_xgetrf_l(torqueBalancingYoga_B.b_A_k, ipiv, &info);
+    torqueBalancingYoga_xgetrf_a(torqueBalancingYoga_B.b_A_k, ipiv, &info);
     memcpy(&y[0], &A[0], 529U * sizeof(real_T));
     torqueBalancingYoga_xtrsm(torqueBalancingYoga_B.b_A_k, y);
-    torqueBalancingYoga_xtrsm_d(torqueBalancingYoga_B.b_A_k, y);
+    torqueBalancingYoga_xtrsm_j(torqueBalancingYoga_B.b_A_k, y);
     for (info = 21; info >= 0; info--) {
         if (info + 1 != ipiv[info]) {
             jp = ipiv[info] - 1;
@@ -1833,7 +1835,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_mrdivide(const real_T A[
 
 /* Function for MATLAB Function: '<S15>/Add motor reflected inertias' */
 void torqueBalancingYogaModelClass::torqueBala_computeMotorsInertia(
-    const struct_nKwr8yfDbWZ5195E5duazE* b_Config,
+    const struct_hu1Fw0wiIZUzALhhiDLesH* b_Config,
     real_T reflectedInertia[529])
 {
     static const real_T b[529] = {
@@ -1925,7 +1927,7 @@ void torqueBalancingYogaModelClass::torqueBala_computeMotorsInertia(
 }
 
 /* Function for MATLAB Function: '<S109>/References for H' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_mldivide_e(const real_T A[36], real_T B[36])
+void torqueBalancingYogaModelClass::torqueBalancingYoga_mldivide_h(const real_T A[36], real_T B[36])
 {
     int32_T ip;
     real_T b_A[36];
@@ -2212,7 +2214,7 @@ torqueBalancingYogaModelClass::torqueBalancingYoga_xnrm2(int32_T n, const real_T
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-real_T torqueBalancingYogaModelClass::torqueBalancingYoga_xnrm2_f(int32_T n,
+real_T torqueBalancingYogaModelClass::torqueBalancingYoga_xnrm2_a(int32_T n,
                                                                   const real_T x[6],
                                                                   int32_T ix0)
 {
@@ -2251,7 +2253,7 @@ real_T torqueBalancingYogaModelClass::torqueBalancingYoga_xnrm2_f(int32_T n,
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xaxpy_kt(int32_T n,
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xaxpy_i5(int32_T n,
                                                                  real_T a,
                                                                  const real_T x[12],
                                                                  int32_T ix0,
@@ -2273,7 +2275,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xaxpy_kt(int32_T n,
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xaxpy_k(int32_T n,
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xaxpy_i(int32_T n,
                                                                 real_T a,
                                                                 const real_T x[72],
                                                                 int32_T ix0,
@@ -2341,7 +2343,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xaxpy(int32_T n,
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-real_T torqueBalancingYogaModelClass::torqueBalancingYoga_xdotc_p(int32_T n,
+real_T torqueBalancingYogaModelClass::torqueBalancingYoga_xdotc_a(int32_T n,
                                                                   const real_T x[36],
                                                                   int32_T ix0,
                                                                   const real_T y[36],
@@ -2366,7 +2368,7 @@ real_T torqueBalancingYogaModelClass::torqueBalancingYoga_xdotc_p(int32_T n,
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xaxpy_kto(int32_T n,
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xaxpy_i5v(int32_T n,
                                                                   real_T a,
                                                                   int32_T ix0,
                                                                   real_T y[36],
@@ -2405,7 +2407,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xscal_k(real_T a, real_T
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xswap_m(real_T x[36],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xswap_a(real_T x[36],
                                                                 int32_T ix0,
                                                                 int32_T iy0)
 {
@@ -2425,7 +2427,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xswap_m(real_T x[36],
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xswap_mk(real_T x[72],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xswap_ao(real_T x[72],
                                                                  int32_T ix0,
                                                                  int32_T iy0)
 {
@@ -2517,7 +2519,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xrot(real_T x[36],
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xrot_c(real_T x[72],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xrot_n(real_T x[72],
                                                                int32_T ix0,
                                                                int32_T iy0,
                                                                real_T c,
@@ -2628,7 +2630,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd(const real_T A[72],
         }
 
         if (i + 1 <= 4) {
-            nrm = torqueBalancingYoga_xnrm2_f(5 - i, e, i + 2);
+            nrm = torqueBalancingYoga_xnrm2_a(5 - i, e, i + 2);
             if (nrm == 0.0) {
                 e[i] = 0.0;
             }
@@ -2660,11 +2662,11 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd(const real_T A[72],
                 }
 
                 for (qq = i + 1; qq + 1 < 7; qq++) {
-                    torqueBalancingYoga_xaxpy_k(11 - i, e[qq], b_A, (i + 12 * qq) + 2, work, i + 2);
+                    torqueBalancingYoga_xaxpy_i(11 - i, e[qq], b_A, (i + 12 * qq) + 2, work, i + 2);
                 }
 
                 for (qq = i + 1; qq + 1 < 7; qq++) {
-                    torqueBalancingYoga_xaxpy_kt(
+                    torqueBalancingYoga_xaxpy_i5(
                         11 - i, -e[qq] / e[i + 1], work, i + 2, b_A, (i + 12 * qq) + 2);
                 }
             }
@@ -2711,9 +2713,9 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd(const real_T A[72],
             qp1q = (6 * qq + qq) + 2;
             for (qjj = qq + 1; qjj + 1 < 7; qjj++) {
                 qp1jj = (6 * qjj + qq) + 2;
-                torqueBalancingYoga_xaxpy_kto(
+                torqueBalancingYoga_xaxpy_i5v(
                     5 - qq,
-                    -(torqueBalancingYoga_xdotc_p(5 - qq, Vf, qp1q, Vf, qp1jj) / Vf[qp1q - 1]),
+                    -(torqueBalancingYoga_xdotc_a(5 - qq, Vf, qp1q, Vf, qp1jj) / Vf[qp1q - 1]),
                     qp1q,
                     Vf,
                     qp1jj);
@@ -2860,7 +2862,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd(const real_T A[72],
                     b_s[qjj] = ztest;
                     rt = -smm1 * e[qjj];
                     e[qjj] *= sqds;
-                    torqueBalancingYoga_xrot_c(U, 1 + 12 * qjj, 1 + 12 * (qp1q - 1), sqds, smm1);
+                    torqueBalancingYoga_xrot_n(U, 1 + 12 * qjj, 1 + 12 * (qp1q - 1), sqds, smm1);
                 }
                 break;
 
@@ -2924,7 +2926,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd(const real_T A[72],
                     b_s[qjj] = e[qjj - 1] * -smm1 + sqds * b_s[qjj];
                     ztest = smm1 * e[qjj];
                     e[qjj] *= sqds;
-                    torqueBalancingYoga_xrot_c(U, 1 + 12 * (qjj - 1), 1 + 12 * qjj, sqds, smm1);
+                    torqueBalancingYoga_xrot_n(U, 1 + 12 * (qjj - 1), 1 + 12 * qjj, sqds, smm1);
                 }
 
                 e[i] = rt;
@@ -2942,8 +2944,8 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd(const real_T A[72],
                     rt = b_s[qp1q];
                     b_s[qp1q] = b_s[qq];
                     b_s[qq] = rt;
-                    torqueBalancingYoga_xswap_m(Vf, 1 + 6 * qp1q, 1 + 6 * (qp1q + 1));
-                    torqueBalancingYoga_xswap_mk(U, 1 + 12 * qp1q, 1 + 12 * (qp1q + 1));
+                    torqueBalancingYoga_xswap_a(Vf, 1 + 6 * qp1q, 1 + 6 * (qp1q + 1));
+                    torqueBalancingYoga_xswap_ao(U, 1 + 12 * qp1q, 1 + 12 * (qp1q + 1));
                     qp1q = qq;
                     qq++;
                 }
@@ -3040,7 +3042,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_pinv(const real_T A[72],
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_eye_m(real_T I[144])
+void torqueBalancingYogaModelClass::torqueBalancingYoga_eye_h(real_T I[144])
 {
     int32_T k;
     memset(&I[0], 0, 144U * sizeof(real_T));
@@ -3050,7 +3052,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_eye_m(real_T I[144])
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xswap_mks(real_T x[841],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xswap_ao0(real_T x[841],
                                                                   int32_T ix0,
                                                                   int32_T iy0)
 {
@@ -3070,7 +3072,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xswap_mks(real_T x[841],
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xgetrf_g(real_T A[841],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xgetrf_p(real_T A[841],
                                                                  int32_T ipiv[29],
                                                                  int32_T* info)
 {
@@ -3106,7 +3108,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xgetrf_g(real_T A[841],
         if (A[(c + jA) - 1] != 0.0) {
             if (jA - 1 != 0) {
                 ipiv[j] = j + jA;
-                torqueBalancingYoga_xswap_mks(A, j + 1, j + jA);
+                torqueBalancingYoga_xswap_ao0(A, j + 1, j + jA);
             }
 
             jA = (c - j) + 29;
@@ -3142,7 +3144,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xgetrf_g(real_T A[841],
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_b(const real_T A[841], real_T B[348])
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_a(const real_T A[841], real_T B[348])
 {
     real_T temp;
     int32_T jBcol;
@@ -3174,7 +3176,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_b(const real_T A[8
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_bp(const real_T A[841], real_T B[348])
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_aw(const real_T A[841], real_T B[348])
 {
     int32_T jAcol;
     int32_T jBcol;
@@ -3199,7 +3201,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_bp(const real_T A[
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_mrdivide_a(const real_T A[348],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_mrdivide_n(const real_T A[348],
                                                                    const real_T B[841],
                                                                    real_T y[348])
 {
@@ -3209,10 +3211,10 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_mrdivide_a(const real_T 
     real_T temp;
     int32_T xi;
     memcpy(&torqueBalancingYoga_B.b_A[0], &B[0], 841U * sizeof(real_T));
-    torqueBalancingYoga_xgetrf_g(torqueBalancingYoga_B.b_A, ipiv, &info);
+    torqueBalancingYoga_xgetrf_p(torqueBalancingYoga_B.b_A, ipiv, &info);
     memcpy(&y[0], &A[0], 348U * sizeof(real_T));
-    torqueBalancingYoga_xtrsm_b(torqueBalancingYoga_B.b_A, y);
-    torqueBalancingYoga_xtrsm_bp(torqueBalancingYoga_B.b_A, y);
+    torqueBalancingYoga_xtrsm_a(torqueBalancingYoga_B.b_A, y);
+    torqueBalancingYoga_xtrsm_aw(torqueBalancingYoga_B.b_A, y);
     for (info = 27; info >= 0; info--) {
         if (info + 1 != ipiv[info]) {
             jp = ipiv[info] - 1;
@@ -3226,7 +3228,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_mrdivide_a(const real_T 
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_mrdivide_al(real_T A[138],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_mrdivide_ne(real_T A[138],
                                                                     const real_T B[36])
 {
     real_T b_A[36];
@@ -3427,7 +3429,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_pinvDamped(const real_T 
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_eye_mj(real_T I[529])
+void torqueBalancingYogaModelClass::torqueBalancingYoga_eye_hp(real_T I[529])
 {
     int32_T k;
     memset(&I[0], 0, 529U * sizeof(real_T));
@@ -3459,7 +3461,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_blkdiag(const real_T var
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_blkdiag_l(const real_T varargin_1[114],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_blkdiag_b(const real_T varargin_1[114],
                                                                   const real_T varargin_2[114],
                                                                   real_T y[456])
 {
@@ -3487,7 +3489,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_diag(const real_T v[23],
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-real_T torqueBalancingYogaModelClass::torqueBalancingYoga_xnrm2_fe(int32_T n,
+real_T torqueBalancingYogaModelClass::torqueBalancingYoga_xnrm2_ap(int32_T n,
                                                                    const real_T x[529],
                                                                    int32_T ix0)
 {
@@ -3526,7 +3528,7 @@ real_T torqueBalancingYogaModelClass::torqueBalancingYoga_xnrm2_fe(int32_T n,
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-real_T torqueBalancingYogaModelClass::torqueBalancingYoga_xnrm2_fes(int32_T n,
+real_T torqueBalancingYogaModelClass::torqueBalancingYoga_xnrm2_ap0(int32_T n,
                                                                     const real_T x[23],
                                                                     int32_T ix0)
 {
@@ -3565,7 +3567,7 @@ real_T torqueBalancingYogaModelClass::torqueBalancingYoga_xnrm2_fes(int32_T n,
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYog_xaxpy_ktoigf(int32_T n,
+void torqueBalancingYogaModelClass::torqueBalancingYog_xaxpy_i5v01w(int32_T n,
                                                                     real_T a,
                                                                     const real_T x[23],
                                                                     int32_T ix0,
@@ -3587,7 +3589,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYog_xaxpy_ktoigf(int32_T n,
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xaxpy_ktoig(int32_T n,
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xaxpy_i5v01(int32_T n,
                                                                     real_T a,
                                                                     const real_T x[529],
                                                                     int32_T ix0,
@@ -3609,7 +3611,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xaxpy_ktoig(int32_T n,
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-real_T torqueBalancingYogaModelClass::torqueBalancingYoga_xdotc_pe(int32_T n,
+real_T torqueBalancingYogaModelClass::torqueBalancingYoga_xdotc_a2(int32_T n,
                                                                    const real_T x[529],
                                                                    int32_T ix0,
                                                                    const real_T y[529],
@@ -3634,7 +3636,7 @@ real_T torqueBalancingYogaModelClass::torqueBalancingYoga_xdotc_pe(int32_T n,
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xaxpy_ktoi(int32_T n,
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xaxpy_i5v0(int32_T n,
                                                                    real_T a,
                                                                    int32_T ix0,
                                                                    real_T y[529],
@@ -3655,7 +3657,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xaxpy_ktoi(int32_T n,
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xscal_kg(real_T a,
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xscal_ks(real_T a,
                                                                  real_T x[529],
                                                                  int32_T ix0)
 {
@@ -3666,7 +3668,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xscal_kg(real_T a,
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xswap_mksh(real_T x[529],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xswap_ao0c(real_T x[529],
                                                                    int32_T ix0,
                                                                    int32_T iy0)
 {
@@ -3686,7 +3688,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xswap_mksh(real_T x[529]
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xrot_cm(real_T x[529],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xrot_nr(real_T x[529],
                                                                 int32_T ix0,
                                                                 int32_T iy0,
                                                                 real_T c,
@@ -3708,7 +3710,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xrot_cm(real_T x[529],
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_svd_g(const real_T A[529],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_svd_d(const real_T A[529],
                                                               real_T U[529],
                                                               real_T s[23],
                                                               real_T V[529])
@@ -3741,7 +3743,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd_g(const real_T A[529
     for (m = 0; m < 22; m++) {
         qq = 23 * m + m;
         apply_transform = false;
-        nrm = torqueBalancingYoga_xnrm2_fe(23 - m, torqueBalancingYoga_B.b_A_b, qq + 1);
+        nrm = torqueBalancingYoga_xnrm2_ap(23 - m, torqueBalancingYoga_B.b_A_b, qq + 1);
         if (nrm > 0.0) {
             apply_transform = true;
             if (torqueBalancingYoga_B.b_A_b[qq] < 0.0) {
@@ -3775,9 +3777,9 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd_g(const real_T A[529
         for (qp1q = m + 1; qp1q + 1 < 24; qp1q++) {
             qjj = 23 * qp1q + m;
             if (apply_transform) {
-                torqueBalancingYoga_xaxpy_ktoi(
+                torqueBalancingYoga_xaxpy_i5v0(
                     23 - m,
-                    -(torqueBalancingYoga_xdotc_pe(23 - m,
+                    -(torqueBalancingYoga_xdotc_a2(23 - m,
                                                    torqueBalancingYoga_B.b_A_b,
                                                    qq + 1,
                                                    torqueBalancingYoga_B.b_A_b,
@@ -3796,7 +3798,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd_g(const real_T A[529
         }
 
         if (m + 1 <= 21) {
-            nrm = torqueBalancingYoga_xnrm2_fes(22 - m, e, m + 2);
+            nrm = torqueBalancingYoga_xnrm2_ap0(22 - m, e, m + 2);
             if (nrm == 0.0) {
                 e[m] = 0.0;
             }
@@ -3828,12 +3830,12 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd_g(const real_T A[529
                 }
 
                 for (qq = m + 1; qq + 1 < 24; qq++) {
-                    torqueBalancingYoga_xaxpy_ktoig(
+                    torqueBalancingYoga_xaxpy_i5v01(
                         22 - m, e[qq], torqueBalancingYoga_B.b_A_b, (m + 23 * qq) + 2, work, m + 2);
                 }
 
                 for (qq = m + 1; qq + 1 < 24; qq++) {
-                    torqueBalancingYog_xaxpy_ktoigf(22 - m,
+                    torqueBalancingYog_xaxpy_i5v01w(22 - m,
                                                     -e[qq] / e[m + 1],
                                                     work,
                                                     m + 2,
@@ -3859,9 +3861,9 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd_g(const real_T A[529
         if (b_s[qp1q] != 0.0) {
             for (qp1jj = qp1q + 1; qp1jj + 1 < 24; qp1jj++) {
                 qjj = (23 * qp1jj + qp1q) + 1;
-                torqueBalancingYoga_xaxpy_ktoi(
+                torqueBalancingYoga_xaxpy_i5v0(
                     23 - qp1q,
-                    -(torqueBalancingYoga_xdotc_pe(23 - qp1q, U, qq + 1, U, qjj) / U[qq]),
+                    -(torqueBalancingYoga_xdotc_a2(23 - qp1q, U, qq + 1, U, qjj) / U[qq]),
                     qq + 1,
                     U,
                     qjj);
@@ -3887,9 +3889,9 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd_g(const real_T A[529
             qp1q = (23 * qq + qq) + 2;
             for (qjj = qq + 1; qjj + 1 < 24; qjj++) {
                 qp1jj = (23 * qjj + qq) + 2;
-                torqueBalancingYoga_xaxpy_ktoi(
+                torqueBalancingYoga_xaxpy_i5v0(
                     22 - qq,
-                    -(torqueBalancingYoga_xdotc_pe(
+                    -(torqueBalancingYoga_xdotc_a2(
                           22 - qq, torqueBalancingYoga_B.Vf, qp1q, torqueBalancingYoga_B.Vf, qp1jj)
                       / torqueBalancingYoga_B.Vf[qp1q - 1]),
                     qp1q,
@@ -3912,7 +3914,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd_g(const real_T A[529
                 ztest = e[qq] / nrm;
             }
 
-            torqueBalancingYoga_xscal_kg(nrm, U, 1 + 23 * qq);
+            torqueBalancingYoga_xscal_ks(nrm, U, 1 + 23 * qq);
         }
 
         if ((qq + 1 < 23) && (ztest != 0.0)) {
@@ -3920,7 +3922,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd_g(const real_T A[529
             nrm = rt / ztest;
             ztest = rt;
             b_s[qq + 1] *= nrm;
-            torqueBalancingYoga_xscal_kg(nrm, torqueBalancingYoga_B.Vf, 1 + 23 * (qq + 1));
+            torqueBalancingYoga_xscal_ks(nrm, torqueBalancingYoga_B.Vf, 1 + 23 * (qq + 1));
         }
 
         e[qq] = ztest;
@@ -4022,7 +4024,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd_g(const real_T A[529
                         e[qjj - 1] *= sqds;
                     }
 
-                    torqueBalancingYoga_xrot_cm(
+                    torqueBalancingYoga_xrot_nr(
                         torqueBalancingYoga_B.Vf, 1 + 23 * qjj, 1 + 23 * (m + 1), sqds, smm1);
                 }
                 break;
@@ -4036,7 +4038,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd_g(const real_T A[529
                     b_s[qjj] = ztest;
                     rt = -smm1 * e[qjj];
                     e[qjj] *= sqds;
-                    torqueBalancingYoga_xrot_cm(U, 1 + 23 * qjj, 1 + 23 * (qp1q - 1), sqds, smm1);
+                    torqueBalancingYoga_xrot_nr(U, 1 + 23 * qjj, 1 + 23 * (qp1q - 1), sqds, smm1);
                 }
                 break;
 
@@ -4093,7 +4095,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd_g(const real_T A[529
                     e[qjj - 1] = e[qjj - 1] * sqds - b_s[qjj - 1] * smm1;
                     ztest = smm1 * b_s[qjj];
                     b_s[qjj] *= sqds;
-                    torqueBalancingYoga_xrot_cm(
+                    torqueBalancingYoga_xrot_nr(
                         torqueBalancingYoga_B.Vf, 1 + 23 * (qjj - 1), 1 + 23 * qjj, sqds, smm1);
                     torqueBalancingYoga_xrotg(&rt, &ztest, &sqds, &smm1);
                     b_s[qjj - 1] = rt;
@@ -4101,7 +4103,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd_g(const real_T A[529
                     b_s[qjj] = e[qjj - 1] * -smm1 + sqds * b_s[qjj];
                     ztest = smm1 * e[qjj];
                     e[qjj] *= sqds;
-                    torqueBalancingYoga_xrot_cm(U, 1 + 23 * (qjj - 1), 1 + 23 * qjj, sqds, smm1);
+                    torqueBalancingYoga_xrot_nr(U, 1 + 23 * (qjj - 1), 1 + 23 * qjj, sqds, smm1);
                 }
 
                 e[m] = rt;
@@ -4111,7 +4113,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd_g(const real_T A[529
             default:
                 if (b_s[qp1q] < 0.0) {
                     b_s[qp1q] = -b_s[qp1q];
-                    torqueBalancingYoga_xscal_kg(-1.0, torqueBalancingYoga_B.Vf, 1 + 23 * qp1q);
+                    torqueBalancingYoga_xscal_ks(-1.0, torqueBalancingYoga_B.Vf, 1 + 23 * qp1q);
                 }
 
                 qq = qp1q + 1;
@@ -4119,9 +4121,9 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_svd_g(const real_T A[529
                     rt = b_s[qp1q];
                     b_s[qp1q] = b_s[qq];
                     b_s[qq] = rt;
-                    torqueBalancingYoga_xswap_mksh(
+                    torqueBalancingYoga_xswap_ao0c(
                         torqueBalancingYoga_B.Vf, 1 + 23 * qp1q, 1 + 23 * (qp1q + 1));
-                    torqueBalancingYoga_xswap_mksh(U, 1 + 23 * qp1q, 1 + 23 * (qp1q + 1));
+                    torqueBalancingYoga_xswap_ao0c(U, 1 + 23 * qp1q, 1 + 23 * (qp1q + 1));
                     qp1q = qq;
                     qq++;
                 }
@@ -4177,7 +4179,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xgemm(int32_T k,
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_pinv_d(const real_T A[529],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_pinv_i(const real_T A[529],
                                                                real_T tol,
                                                                real_T X[529])
 {
@@ -4186,7 +4188,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_pinv_d(const real_T A[52
     real_T s[23];
     int32_T j;
     memset(&X[0], 0, 529U * sizeof(real_T));
-    torqueBalancingYoga_svd_g(A, torqueBalancingYoga_B.U, s, torqueBalancingYoga_B.V);
+    torqueBalancingYoga_svd_d(A, torqueBalancingYoga_B.U, s, torqueBalancingYoga_B.V);
     r = 0;
     vcol = 1;
     while ((vcol < 24) && (s[vcol - 1] > tol)) {
@@ -4197,7 +4199,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_pinv_d(const real_T A[52
     if (r > 0) {
         vcol = 1;
         for (j = 1; j <= r; j++) {
-            torqueBalancingYoga_xscal_kg(1.0 / s[j - 1], torqueBalancingYoga_B.V, vcol);
+            torqueBalancingYoga_xscal_ks(1.0 / s[j - 1], torqueBalancingYoga_B.V, vcol);
             vcol += 23;
         }
 
@@ -4206,7 +4208,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_pinv_d(const real_T A[52
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_diag_h(const real_T v[23], real_T d[529])
+void torqueBalancingYogaModelClass::torqueBalancingYoga_diag_a(const real_T v[23], real_T d[529])
 {
     int32_T j;
     memset(&d[0], 0, 529U * sizeof(real_T));
@@ -4216,7 +4218,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_diag_h(const real_T v[23
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xswap_mkshm(real_T x[529],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xswap_ao0cq(real_T x[529],
                                                                     int32_T ix0,
                                                                     int32_T iy0)
 {
@@ -4236,7 +4238,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xswap_mkshm(real_T x[529
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xgetrf_gr(real_T A[529],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xgetrf_pd(real_T A[529],
                                                                   int32_T ipiv[23],
                                                                   int32_T* info)
 {
@@ -4272,7 +4274,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xgetrf_gr(real_T A[529],
         if (A[(c + jA) - 1] != 0.0) {
             if (jA - 1 != 0) {
                 ipiv[j] = j + jA;
-                torqueBalancingYoga_xswap_mkshm(A, j + 1, j + jA);
+                torqueBalancingYoga_xswap_ao0cq(A, j + 1, j + jA);
             }
 
             jA = (c - j) + 23;
@@ -4308,7 +4310,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xgetrf_gr(real_T A[529],
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_bps(const real_T A[529],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_awk(const real_T A[529],
                                                                   real_T B[276])
 {
     real_T temp;
@@ -4341,7 +4343,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_bps(const real_T A
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_bpsu(const real_T A[529],
+void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_awkh(const real_T A[529],
                                                                    real_T B[276])
 {
     int32_T jAcol;
@@ -4367,7 +4369,7 @@ void torqueBalancingYogaModelClass::torqueBalancingYoga_xtrsm_bpsu(const real_T 
 }
 
 /* Function for MATLAB Function: '<S6>/Balancing Controller ' */
-void torqueBalancingYogaModelClass::torqueBalancingYog_pinvDamped_l(const real_T A[276],
+void torqueBalancingYogaModelClass::torqueBalancingYog_pinvDamped_b(const real_T A[276],
                                                                     real_T regDamp,
                                                                     real_T pinvDampA[276])
 {
@@ -4408,15 +4410,15 @@ void torqueBalancingYogaModelClass::torqueBalancingYog_pinvDamped_l(const real_T
         }
     }
 
-    torqueBalancingYoga_xgetrf_gr(torqueBalancingYoga_B.b_A_c, ipiv, &info);
+    torqueBalancingYoga_xgetrf_pd(torqueBalancingYoga_B.b_A_c, ipiv, &info);
     for (info = 0; info < 23; info++) {
         for (jp = 0; jp < 12; jp++) {
             pinvDampA[jp + 12 * info] = A[23 * jp + info];
         }
     }
 
-    torqueBalancingYoga_xtrsm_bps(torqueBalancingYoga_B.b_A_c, pinvDampA);
-    torqueBalancingYoga_xtrsm_bpsu(torqueBalancingYoga_B.b_A_c, pinvDampA);
+    torqueBalancingYoga_xtrsm_awk(torqueBalancingYoga_B.b_A_c, pinvDampA);
+    torqueBalancingYoga_xtrsm_awkh(torqueBalancingYoga_B.b_A_c, pinvDampA);
     for (info = 21; info >= 0; info--) {
         if (info + 1 != ipiv[info]) {
             jp = ipiv[info] - 1;
@@ -4454,6 +4456,7 @@ void torqueBalancingYogaModelClass::step()
     boolean_T rtb_Compare_c;
     boolean_T rtb_Compare_i;
     boolean_T rtb_Compare_h;
+    boolean_T rtb_Compare_a;
     boolean_T rtb_Compare_l;
     boolean_T rtb_Compare_b;
     boolean_T rtb_Compare_j;
@@ -4636,7 +4639,7 @@ void torqueBalancingYogaModelClass::step()
         }
     }
 
-    torqueBalancingYoga_mrdivide_g(
+    torqueBalancingYoga_mrdivide_f(
         b, torqueBalancingYoga_B.Gamma_m, torqueBalancingYoga_B.invTGamma);
     for (i_0 = 0; i_0 < 23; i_0++) {
         for (AR_tmp = 0; AR_tmp < 23; AR_tmp++) {
@@ -4651,7 +4654,7 @@ void torqueBalancingYogaModelClass::step()
         }
     }
 
-    torqueBalancingYoga_mrdivide_g(b, torqueBalancingYoga_B.Gamma_m, torqueBalancingYoga_B.Gamma);
+    torqueBalancingYoga_mrdivide_f(b, torqueBalancingYoga_B.Gamma_m, torqueBalancingYoga_B.Gamma);
     for (i_0 = 0; i_0 < 23; i_0++) {
         for (AR_tmp = 0; AR_tmp < 23; AR_tmp++) {
             Gamma_tmp = i_0 + 23 * AR_tmp;
@@ -5249,8 +5252,8 @@ void torqueBalancingYogaModelClass::step()
 
         /* MATLAB Function: '<S69>/MATLAB Function' */
         torqueBalancin_MATLABFunction_k(torqueBalancingYoga_B.jointAngles,
-                                        &torqueBalancingYoga_B.sf_MATLABFunction_d,
-                                        &torqueBalancingYoga_DW.sf_MATLABFunction_d);
+                                        &torqueBalancingYoga_B.sf_MATLABFunction_d4,
+                                        &torqueBalancingYoga_DW.sf_MATLABFunction_d4);
 
         /* S-Function (WBToolbox): '<S92>/S-Function' */
         {
@@ -5409,8 +5412,8 @@ void torqueBalancingYogaModelClass::step()
 
         /* MATLAB Function: '<S96>/MATLAB Function' */
         torqueBalancin_MATLABFunction_l(torqueBalancingYoga_B.inertial_n,
-                                        &torqueBalancingYoga_B.sf_MATLABFunction_jn,
-                                        &torqueBalancingYoga_DW.sf_MATLABFunction_jn);
+                                        &torqueBalancingYoga_B.sf_MATLABFunction_j,
+                                        &torqueBalancingYoga_DW.sf_MATLABFunction_j);
 
         /* S-Function (WBToolbox): '<S80>/Neck Position' */
         {
@@ -5484,7 +5487,7 @@ void torqueBalancingYogaModelClass::step()
         fromImuToHomogeousTransformFCN(rtb_imu_H_link_l,
                                        torqueBalancingYoga_B.sf_MATLABFunction_ad.s0,
                                        rtb_link_H_root_o,
-                                       torqueBalancingYoga_B.sf_MATLABFunction_jn.s0,
+                                       torqueBalancingYoga_B.sf_MATLABFunction_j.s0,
                                        torqueBalancingYoga_B.inertial_n,
                                        rtb_Switch_m,
                                        &torqueBalancingYoga_B.sf_fromImuToHomogeousTransfor_g,
@@ -5570,7 +5573,7 @@ void torqueBalancingYogaModelClass::step()
         torqueBalancingYoga_B.constraints[1] = 1.0;
         torqueBalancingYoga_eye(torqueBalancingYoga_B.w_H_b);
         memcpy(&torqueBalancingYoga_B.qj_des[0],
-               &torqueBalancingYoga_B.sf_MATLABFunction_d.s0[0],
+               &torqueBalancingYoga_B.sf_MATLABFunction_d4.s0[0],
                23U * sizeof(real_T));
         for (i = 0; i < 23; i++) {
             rtb_impedances[i] = torqueBalancingYoga_P.Gain.impedances[13 * i];
@@ -5633,7 +5636,7 @@ void torqueBalancingYogaModelClass::step()
                             rtb_Switch_jf[(i_0 << 2) + 3];
                     }
 
-                    torqueBalancingYoga_mrdivide_l(torqueBalancingYoga_DW.w_H_fixedLink,
+                    torqueBalancingYoga_mrdivide_d(torqueBalancingYoga_DW.w_H_fixedLink,
                                                    torqueBalancingYoga_B.Switch6_g);
                     torqueBalancingYoga_DW.state = 8.0;
                 }
@@ -5684,7 +5687,7 @@ void torqueBalancingYogaModelClass::step()
             rtb_KDCoM_idx_2 = torqueBalancingYoga_P.Gain.KD_COM[AR_tmp + 25];
             fixed_link_CoMDes[2] = torqueBalancingYoga_B.CoM_des[2];
             fixed_link_CoMDes[3] = 1.0;
-            torqueBalancingYoga_mldivide_a(torqueBalancingYoga_DW.w_H_fixedLink, fixed_link_CoMDes);
+            torqueBalancingYoga_mldivide_n(torqueBalancingYoga_DW.w_H_fixedLink, fixed_link_CoMDes);
             i_0 = (int32_T) torqueBalancingYoga_DW.state;
             for (AR_tmp = 0; AR_tmp < 23; AR_tmp++) {
                 torqueBalancingYoga_B.qj_des[AR_tmp] =
@@ -5988,7 +5991,7 @@ void torqueBalancingYogaModelClass::step()
             rtb_KDCoM_idx_2 = torqueBalancingYoga_P.Gain.KD_COM[AR_tmp + 25];
             tmp_1[0] = rtb_CoM6DCoMXYZ2_i[0] - torqueBalancingYoga_B.CoM_des[0];
             tmp_1[1] = rtb_CoM6DCoMXYZ2_i[1] - torqueBalancingYoga_B.CoM_des[1];
-            if ((torqueBalancingYoga_norm_p(tmp_1) < 10.0 * torqueBalancingYoga_P.Sm.CoM_threshold)
+            if ((torqueBalancingYoga_norm_i(tmp_1) < 10.0 * torqueBalancingYoga_P.Sm.CoM_threshold)
                 && (torqueBalancingYoga_P.Sm.yogaAlsoOnRightFoot
                     && (rtb_Clock1
                         > torqueBalancingYoga_DW.tSwitch + torqueBalancingYoga_P.Sm.tBalancing))) {
@@ -6020,7 +6023,7 @@ void torqueBalancingYogaModelClass::step()
                         rtb_Switch_jf[(i_0 << 2) + 3];
                 }
 
-                torqueBalancingYoga_mrdivide_l(torqueBalancingYoga_DW.w_H_fixedLink,
+                torqueBalancingYoga_mrdivide_d(torqueBalancingYoga_DW.w_H_fixedLink,
                                                torqueBalancingYoga_B.Switch6_g);
                 torqueBalancingYoga_DW.state = 8.0;
                 torqueBalancingYoga_DW.tSwitch = rtb_Clock1;
@@ -6059,7 +6062,7 @@ void torqueBalancingYogaModelClass::step()
                                                + torqueBalancingYoga_B.sf_MATLABFunction_f.s0[2];
             fixed_link_CoMDes[2] = torqueBalancingYoga_B.CoM_des[2];
             fixed_link_CoMDes[3] = 1.0;
-            torqueBalancingYoga_mldivide_a(torqueBalancingYoga_DW.w_H_fixedLink, fixed_link_CoMDes);
+            torqueBalancingYoga_mldivide_n(torqueBalancingYoga_DW.w_H_fixedLink, fixed_link_CoMDes);
             i_0 = (int32_T) torqueBalancingYoga_DW.state;
             AR_tmp = (int32_T) torqueBalancingYoga_DW.state;
             i = (int32_T) torqueBalancingYoga_DW.state;
@@ -6395,7 +6398,7 @@ void torqueBalancingYogaModelClass::step()
                         rtb_Switch_jf[(i_0 << 2) + 3];
                 }
 
-                torqueBalancingYoga_mrdivide_l(torqueBalancingYoga_DW.w_H_fixedLink,
+                torqueBalancingYoga_mrdivide_d(torqueBalancingYoga_DW.w_H_fixedLink,
                                                torqueBalancingYoga_B.Switch6);
                 if (torqueBalancingYoga_P.Sm.demoStartsOnRightSupport) {
                     torqueBalancingYoga_DW.state = 8.0;
@@ -6427,7 +6430,7 @@ void torqueBalancingYogaModelClass::step()
                             rtb_Switch_jf[(i_0 << 2) + 3];
                     }
 
-                    torqueBalancingYoga_mrdivide_l(torqueBalancingYoga_DW.w_H_fixedLink,
+                    torqueBalancingYoga_mrdivide_d(torqueBalancingYoga_DW.w_H_fixedLink,
                                                    torqueBalancingYoga_B.Switch6_g);
                 }
             }
@@ -6600,7 +6603,7 @@ void torqueBalancingYogaModelClass::step()
             }
         }
 
-        torqueBalancingYoga_mldivide_m(pinvJb, pinvJb_0);
+        torqueBalancingYoga_mldivide_f(pinvJb, pinvJb_0);
         for (i_0 = 0; i_0 < 12; i_0++) {
             for (AR_tmp = 0; AR_tmp < 6; AR_tmp++) {
                 pinvJb_1[AR_tmp + 6 * i_0] = -pinvJb_0[6 * i_0 + AR_tmp];
@@ -7238,7 +7241,7 @@ void torqueBalancingYogaModelClass::step()
         torqueBalancingYoga_B.Constant_ib = torqueBalancingYoga_P.Config.DEMO_MOVEMENTS;
         for (i = 0; i < 6; i++) {
             /* MATLAB Function: '<S36>/Compute Base Velocity' */
-            torqueBalancingYoga_B.nu_b_m[i] = 0.0;
+            torqueBalancingYoga_B.nu_b_l[i] = 0.0;
             for (i_0 = 0; i_0 < 23; i_0++) {
                 Gamma_tmp = i + 6 * i_0;
                 pinvJb_2[Gamma_tmp] = 0.0;
@@ -7247,7 +7250,7 @@ void torqueBalancingYogaModelClass::step()
                                           + pinvJb_2[6 * i_0 + i];
                 }
 
-                torqueBalancingYoga_B.nu_b_m[i] +=
+                torqueBalancingYoga_B.nu_b_l[i] +=
                     pinvJb_2[6 * i_0 + i] * torqueBalancingYoga_B.SFunction_m[i_0];
             }
 
@@ -7458,7 +7461,7 @@ void torqueBalancingYogaModelClass::step()
 
         torqueBalancingYoga_B.MultiportSwitch1[57] = torqueBalancingYoga_B.Constant4;
         for (i = 0; i < 6; i++) {
-            torqueBalancingYoga_B.MultiportSwitch1[i + 58] = torqueBalancingYoga_B.nu_b_m[i];
+            torqueBalancingYoga_B.MultiportSwitch1[i + 58] = torqueBalancingYoga_B.nu_b_l[i];
         }
 
         for (i = 0; i < 23; i++) {
@@ -8428,7 +8431,7 @@ void torqueBalancingYogaModelClass::step()
             }
         }
 
-        torqueBalancingYoga_mldivide_e(pinvJb_3, pinvJb);
+        torqueBalancingYoga_mldivide_h(pinvJb_3, pinvJb);
 
         /* '<S116>:1:6' */
         for (i_0 = 0; i_0 < 6; i_0++) {
@@ -8471,7 +8474,7 @@ void torqueBalancingYogaModelClass::step()
             }
         }
 
-        torqueBalancingYoga_mldivide_e(pinvJb_3, pinvJb);
+        torqueBalancingYoga_mldivide_h(pinvJb_3, pinvJb);
 
         /* '<S116>:1:10' */
         for (i_0 = 0; i_0 < 6; i_0++) {
@@ -9037,7 +9040,7 @@ void torqueBalancingYogaModelClass::step()
         }
     }
 
-    torqueBalancingYoga_eye_m(rtb_NA);
+    torqueBalancingYoga_eye_h(rtb_NA);
     for (i_0 = 0; i_0 < 12; i_0++) {
         for (AR_tmp = 0; AR_tmp < 12; AR_tmp++) {
             acc_CoM_des_idx_1 = 0.0;
@@ -9068,7 +9071,7 @@ void torqueBalancingYogaModelClass::step()
         }
     }
 
-    torqueBalancingYoga_mrdivide_a(Jc, torqueBalancingYoga_B.M_with_inertia, JcMinv);
+    torqueBalancingYoga_mrdivide_n(Jc, torqueBalancingYoga_B.M_with_inertia, JcMinv);
     for (i_0 = 0; i_0 < 23; i_0++) {
         for (AR_tmp = 0; AR_tmp < 12; AR_tmp++) {
             Gamma_tmp = AR_tmp + 12 * i_0;
@@ -9091,9 +9094,9 @@ void torqueBalancingYogaModelClass::step()
         }
     }
 
-    torqueBalancingYoga_mrdivide_al(pinvJb_2, pinvJb_3);
+    torqueBalancingYoga_mrdivide_ne(pinvJb_2, pinvJb_3);
     torqueBalancingYoga_pinvDamped(JcMinvSt, torqueBalancingYoga_P.Reg.pinvDamp, Pinv_JcMinvSt);
-    torqueBalancingYoga_eye_mj(torqueBalancingYoga_B.Gamma_m);
+    torqueBalancingYoga_eye_hp(torqueBalancingYoga_B.Gamma_m);
     for (i_0 = 0; i_0 < 23; i_0++) {
         for (AR_tmp = 0; AR_tmp < 23; AR_tmp++) {
             acc_CoM_des_idx_1 = 0.0;
@@ -9116,7 +9119,7 @@ void torqueBalancingYogaModelClass::step()
         }
     }
 
-    torqueBalancingYoga_mrdivide_al(c_a, pinvJb_3);
+    torqueBalancingYoga_mrdivide_ne(c_a, pinvJb_3);
     for (i_0 = 0; i_0 < 23; i_0++) {
         for (AR_tmp = 0; AR_tmp < 23; AR_tmp++) {
             acc_CoM_des_idx_1 = 0.0;
@@ -9192,7 +9195,7 @@ void torqueBalancingYogaModelClass::step()
         }
     }
 
-    torqueBalancingYoga_blkdiag_l(torqueBalancingYoga_B.ConstraintsMatrixQP1Foot,
+    torqueBalancingYoga_blkdiag_b(torqueBalancingYoga_B.ConstraintsMatrixQP1Foot,
                                   constraintMatrixRightFoot,
                                   ConstraintsMatrix2Feet);
     for (i_0 = 0; i_0 < 6; i_0++) {
@@ -9205,13 +9208,13 @@ void torqueBalancingYogaModelClass::step()
         }
     }
 
-    torqueBalancingYoga_mrdivide_al(c_a, pinvJb_3);
+    torqueBalancingYoga_mrdivide_ne(c_a, pinvJb_3);
     torqueBalancingYoga_diag(&torqueBalancingYoga_B.MultiportSwitch1[34],
                              torqueBalancingYoga_B.Gamma_m);
-    torqueBalancingYoga_pinv_d(
+    torqueBalancingYoga_pinv_i(
         torqueBalancingYoga_B.Gamma, torqueBalancingYoga_P.Reg.pinvTol, torqueBalancingYoga_B.dv0);
-    torqueBalancingYoga_diag_h(torqueBalancingYoga_P.Gain.dampings, torqueBalancingYoga_B.dv1);
-    torqueBalancingYoga_pinv_d(
+    torqueBalancingYoga_diag_a(torqueBalancingYoga_P.Gain.dampings, torqueBalancingYoga_B.dv1);
+    torqueBalancingYoga_pinv_i(
         torqueBalancingYoga_B.Gamma, torqueBalancingYoga_P.Reg.pinvTol, torqueBalancingYoga_B.dv2);
     for (i_0 = 0; i_0 < 12; i_0++) {
         rtb_fHdotDesC1C2[i_0] = 0.0;
@@ -9412,7 +9415,7 @@ void torqueBalancingYogaModelClass::step()
                             * (1.0 - torqueBalancingYoga_B.MultiportSwitch1[32]);
     }
 
-    torqueBalancingYog_pinvDamped_l(
+    torqueBalancingYog_pinvDamped_b(
         JcMinvSt, torqueBalancingYoga_P.Reg.pinvDamp * 1.0E-5, unusedExpr);
 
     /* '<S108>:1:9' */
@@ -9556,12 +9559,12 @@ void torqueBalancingYogaModelClass::step()
             // Get the CoderBlockInformation from the PWork
             wbt::CoderBlockInformation* blockInfo = nullptr;
             blockInfo = static_cast<wbt::CoderBlockInformation*>(
-                torqueBalancingYoga_DW.QPTwoFeet_PWORK_l.blockPWork[1]);
+                torqueBalancingYoga_DW.QPTwoFeet_PWORK_m.blockPWork[1]);
 
             // Get the Block from the PWork
             wbt::Block* blockPtr = nullptr;
             blockPtr =
-                static_cast<wbt::Block*>(torqueBalancingYoga_DW.QPTwoFeet_PWORK_l.blockPWork[0]);
+                static_cast<wbt::Block*>(torqueBalancingYoga_DW.QPTwoFeet_PWORK_m.blockPWork[0]);
 
             // Calculate the output
             // --------------------
@@ -9604,10 +9607,10 @@ void torqueBalancingYogaModelClass::step()
                           - torqueBalancingYoga_B.MultiportSwitch1[33]);
 
     /* Logic: '<S142>/not' */
-    torqueBalancingYoga_B.not_a = !torqueBalancingYoga_B.onOneFoot;
+    torqueBalancingYoga_B.not_p = !torqueBalancingYoga_B.onOneFoot;
 
     /* SignalConversion: '<S142>/HiddenBuf_InsertedFor_Two Feet_at_inport_4' */
-    torqueBalancingYoga_B.HiddenBuf_InsertedFor_TwoFeet_a = torqueBalancingYoga_B.not_a;
+    torqueBalancingYoga_B.HiddenBuf_InsertedFor_TwoFeet_a = torqueBalancingYoga_B.not_p;
 
     /* Outputs for Enabled SubSystem: '<S142>/Two Feet' incorporates:
      *  EnablePort: '<S146>/Enable'
@@ -9680,9 +9683,9 @@ void torqueBalancingYogaModelClass::step()
          *  Sum: '<S110>/Sum'
          */
         for (i_0 = 0; i_0 < 6; i_0++) {
-            pinvA_0[i_0] = torqueBalancingYoga_B.QPTwoFeet_o1_j[i_0]
+            pinvA_0[i_0] = torqueBalancingYoga_B.QPTwoFeet_o1_e[i_0]
                            * torqueBalancingYoga_B.MultiportSwitch1[32] * rtb_Clock1;
-            pinvA_0[i_0 + 6] = torqueBalancingYoga_B.QPTwoFeet_o1_j[i_0]
+            pinvA_0[i_0 + 6] = torqueBalancingYoga_B.QPTwoFeet_o1_e[i_0]
                                * torqueBalancingYoga_B.MultiportSwitch1[33] * rtb_Clock1;
         }
 
@@ -9731,9 +9734,9 @@ void torqueBalancingYogaModelClass::step()
          *  Sum: '<S110>/Sum'
          */
         for (i_0 = 0; i_0 < 6; i_0++) {
-            pinvA_0[i_0] = torqueBalancingYoga_B.QPTwoFeet_o1_j[i_0]
+            pinvA_0[i_0] = torqueBalancingYoga_B.QPTwoFeet_o1_e[i_0]
                            * torqueBalancingYoga_B.MultiportSwitch1[32] * rtb_Clock1;
-            pinvA_0[i_0 + 6] = torqueBalancingYoga_B.QPTwoFeet_o1_j[i_0]
+            pinvA_0[i_0 + 6] = torqueBalancingYoga_B.QPTwoFeet_o1_e[i_0]
                                * torqueBalancingYoga_B.MultiportSwitch1[33] * rtb_Clock1;
         }
 
@@ -9764,20 +9767,69 @@ void torqueBalancingYogaModelClass::step()
 
     /* End of Switch: '<S111>/Switch' */
 
-    /* Saturate: '<Root>/Saturation' */
+    /* Constant: '<S158>/Constant' */
+    torqueBalancingYoga_B.Constant_c = torqueBalancingYoga_P.CompareToConstant_const_l;
+
+    /* RelationalOperator: '<S158>/Compare' incorporates:
+     *  Clock: '<S157>/Clock'
+     */
+    rtb_Compare_a = ((&torqueBalancingYoga_M)->Timing.t[0] == torqueBalancingYoga_B.Constant_c);
+
+    /* MATLAB Function: '<S157>/MATLAB Function' */
+    torqueBalancin_MATLABFunction_k(torqueBalancingYoga_B.Switch_c,
+                                    &torqueBalancingYoga_B.sf_MATLABFunction_p,
+                                    &torqueBalancingYoga_DW.sf_MATLABFunction_p);
+
+    /* MATLAB Function: '<S9>/Saturate the Torque Derivative' */
+    /* MATLAB Function 'tauDot Saturation/Saturate the Torque Derivative': '<S156>:1' */
+    /* '<S156>:1:3' */
+    if (!torqueBalancingYoga_DW.uPrev_not_empty) {
+        memcpy(&torqueBalancingYoga_DW.uPrev[0],
+               &torqueBalancingYoga_B.sf_MATLABFunction_p.s0[0],
+               23U * sizeof(real_T));
+        torqueBalancingYoga_DW.uPrev_not_empty = true;
+    }
+
+    rtb_Clock1 = torqueBalancingYoga_P.Config.tauDot_maxAbs * torqueBalancingYoga_P.Config.Ts;
+    acc_CoM_des_idx_0 =
+        -torqueBalancingYoga_P.Config.tauDot_maxAbs * torqueBalancingYoga_P.Config.Ts;
+
+    /* Constant: '<S9>/Constant' */
+    torqueBalancingYoga_B.Constant_he = torqueBalancingYoga_P.Config.SATURATE_TORQUE_DERIVATIVE;
     for (i = 0; i < 23; i++) {
-        if (torqueBalancingYoga_B.Switch_c[i] > torqueBalancingYoga_P.Sat.torque) {
+        /* MATLAB Function: '<S9>/Saturate the Torque Derivative' */
+        rtb_KPCoM_idx_0 = torqueBalancingYoga_B.Switch_c[i] - torqueBalancingYoga_DW.uPrev[i];
+        if (rtb_KPCoM_idx_0 > rtb_Clock1) {
+            rtb_KPCoM_idx_0 = rtb_Clock1;
+        }
+
+        if (rtb_KPCoM_idx_0 < acc_CoM_des_idx_0) {
+            rtb_KPCoM_idx_0 = acc_CoM_des_idx_0;
+        }
+
+        rtb_KPCoM_idx_0 += torqueBalancingYoga_DW.uPrev[i];
+        torqueBalancingYoga_DW.uPrev[i] = rtb_KPCoM_idx_0;
+
+        /* Switch: '<S9>/Switch' */
+        if (!torqueBalancingYoga_B.Constant_he) {
+            rtb_KPCoM_idx_0 = torqueBalancingYoga_B.Switch_c[i];
+        }
+
+        /* End of Switch: '<S9>/Switch' */
+
+        /* Saturate: '<Root>/Saturation' */
+        if (rtb_KPCoM_idx_0 > torqueBalancingYoga_P.Sat.torque) {
             torqueBalancingYoga_B.Saturation[i] = torqueBalancingYoga_P.Sat.torque;
         }
-        else if (torqueBalancingYoga_B.Switch_c[i] < -torqueBalancingYoga_P.Sat.torque) {
+        else if (rtb_KPCoM_idx_0 < -torqueBalancingYoga_P.Sat.torque) {
             torqueBalancingYoga_B.Saturation[i] = -torqueBalancingYoga_P.Sat.torque;
         }
         else {
-            torqueBalancingYoga_B.Saturation[i] = torqueBalancingYoga_B.Switch_c[i];
+            torqueBalancingYoga_B.Saturation[i] = rtb_KPCoM_idx_0;
         }
-    }
 
-    /* End of Saturate: '<Root>/Saturation' */
+        /* End of Saturate: '<Root>/Saturation' */
+    }
 
     /* S-Function (WBToolbox): '<S5>/S-Function' */
     {
@@ -10759,7 +10811,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -10939,7 +10991,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -11057,7 +11109,7 @@ void torqueBalancingYogaModelClass::initialize()
             params.storeParameter<double>(
                 0.5, wbt::ParameterMetadata(wbt::ParameterType::DOUBLE, 7.0, 1.0, 1.0, "Timeout"));
             params.storeParameter<std::string>(
-                "/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o",
+                "/wholeBodyDynamics/right_foot/cartesianEndEffectorWrench:o",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 1.0, 1.0, 1.0, "PortName"));
             params.storeParameter<std::string>(
                 "YarpRead",
@@ -11173,7 +11225,7 @@ void torqueBalancingYogaModelClass::initialize()
             params.storeParameter<double>(
                 0.5, wbt::ParameterMetadata(wbt::ParameterType::DOUBLE, 7.0, 1.0, 1.0, "Timeout"));
             params.storeParameter<std::string>(
-                "/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o",
+                "/wholeBodyDynamics/left_foot/cartesianEndEffectorWrench:o",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 1.0, 1.0, 1.0, "PortName"));
             params.storeParameter<std::string>(
                 "YarpRead",
@@ -11357,7 +11409,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "imu_frame",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -11542,7 +11594,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "l_sole",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -11727,7 +11779,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "root_link",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -11848,7 +11900,7 @@ void torqueBalancingYogaModelClass::initialize()
             params.storeParameter<double>(
                 0.5, wbt::ParameterMetadata(wbt::ParameterType::DOUBLE, 7.0, 1.0, 1.0, "Timeout"));
             params.storeParameter<std::string>(
-                "/icubSim/inertial",
+                "/icub/inertial",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 1.0, 1.0, 1.0, "PortName"));
             params.storeParameter<std::string>(
                 "YarpRead",
@@ -11963,7 +12015,7 @@ void torqueBalancingYogaModelClass::initialize()
             params.storeParameter<double>(
                 0.5, wbt::ParameterMetadata(wbt::ParameterType::DOUBLE, 7.0, 1.0, 1.0, "Timeout"));
             params.storeParameter<std::string>(
-                "/icubSim/head/state:o",
+                "/icub/head/state:o",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 1.0, 1.0, 1.0, "PortName"));
             params.storeParameter<std::string>(
                 "YarpRead",
@@ -12141,7 +12193,7 @@ void torqueBalancingYogaModelClass::initialize()
             params.storeParameter<std::string>(
                 "com", wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -12326,7 +12378,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "imu_frame",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -12511,7 +12563,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "r_sole",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -12696,7 +12748,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "root_link",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -12818,7 +12870,7 @@ void torqueBalancingYogaModelClass::initialize()
             params.storeParameter<double>(
                 0.5, wbt::ParameterMetadata(wbt::ParameterType::DOUBLE, 7.0, 1.0, 1.0, "Timeout"));
             params.storeParameter<std::string>(
-                "/icubSim/head/state:o",
+                "/icub/head/state:o",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 1.0, 1.0, 1.0, "PortName"));
             params.storeParameter<std::string>(
                 "YarpRead",
@@ -12996,7 +13048,7 @@ void torqueBalancingYogaModelClass::initialize()
             params.storeParameter<std::string>(
                 "com", wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -13181,7 +13233,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "l_sole",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -13366,7 +13418,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "r_sole",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -13551,7 +13603,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -13869,7 +13921,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "imu_frame",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -14054,7 +14106,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "root_link",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -14239,7 +14291,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "l_sole",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -14424,7 +14476,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "r_sole",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -14546,7 +14598,7 @@ void torqueBalancingYogaModelClass::initialize()
             params.storeParameter<double>(
                 0.5, wbt::ParameterMetadata(wbt::ParameterType::DOUBLE, 7.0, 1.0, 1.0, "Timeout"));
             params.storeParameter<std::string>(
-                "/icubSim/head/state:o",
+                "/icub/head/state:o",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 1.0, 1.0, 1.0, "PortName"));
             params.storeParameter<std::string>(
                 "YarpRead",
@@ -14662,7 +14714,7 @@ void torqueBalancingYogaModelClass::initialize()
             params.storeParameter<double>(
                 0.5, wbt::ParameterMetadata(wbt::ParameterType::DOUBLE, 7.0, 1.0, 1.0, "Timeout"));
             params.storeParameter<std::string>(
-                "/icubSim/inertial",
+                "/icub/inertial",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 1.0, 1.0, 1.0, "PortName"));
             params.storeParameter<std::string>(
                 "YarpRead",
@@ -14841,7 +14893,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "l_sole",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -15026,7 +15078,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "r_sole",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -15217,7 +15269,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -15396,7 +15448,7 @@ void torqueBalancingYogaModelClass::initialize()
             params.storeParameter<std::string>(
                 "com", wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -15539,7 +15591,7 @@ void torqueBalancingYogaModelClass::initialize()
                 wbt::ParameterMetadata(
                     wbt::ParameterType::BOOL, 6.0, 1.0, 1.0, "ReadExternalSettlingTime"));
             params.storeParameter<double>(
-                1.0,
+                0.01,
                 wbt::ParameterMetadata(wbt::ParameterType::DOUBLE, 2.0, 1.0, 1.0, "SettlingTime"));
             params.storeParameter<double>(
                 0.01,
@@ -15726,7 +15778,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -15915,7 +15967,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -16109,7 +16161,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -16305,7 +16357,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "imu_frame",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -16490,7 +16542,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "l_sole",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -16675,7 +16727,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "root_link",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -16796,7 +16848,7 @@ void torqueBalancingYogaModelClass::initialize()
             params.storeParameter<double>(
                 0.5, wbt::ParameterMetadata(wbt::ParameterType::DOUBLE, 7.0, 1.0, 1.0, "Timeout"));
             params.storeParameter<std::string>(
-                "/icubSim/inertial",
+                "/icub/inertial",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 1.0, 1.0, 1.0, "PortName"));
             params.storeParameter<std::string>(
                 "YarpRead",
@@ -16910,7 +16962,7 @@ void torqueBalancingYogaModelClass::initialize()
             params.storeParameter<double>(
                 0.5, wbt::ParameterMetadata(wbt::ParameterType::DOUBLE, 7.0, 1.0, 1.0, "Timeout"));
             params.storeParameter<std::string>(
-                "/icubSim/head/state:o",
+                "/icub/head/state:o",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 1.0, 1.0, 1.0, "PortName"));
             params.storeParameter<std::string>(
                 "YarpRead",
@@ -17088,7 +17140,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "imu_frame",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -17273,7 +17325,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "r_sole",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -17458,7 +17510,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "root_link",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -17580,7 +17632,7 @@ void torqueBalancingYogaModelClass::initialize()
             params.storeParameter<double>(
                 0.5, wbt::ParameterMetadata(wbt::ParameterType::DOUBLE, 7.0, 1.0, 1.0, "Timeout"));
             params.storeParameter<std::string>(
-                "/icubSim/head/state:o",
+                "/icub/head/state:o",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 1.0, 1.0, 1.0, "PortName"));
             params.storeParameter<std::string>(
                 "YarpRead",
@@ -17759,7 +17811,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "l_sole",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -17944,7 +17996,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "r_sole",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -18126,7 +18178,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -18317,7 +18369,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "l_sole",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -18502,7 +18554,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "r_sole",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -18687,7 +18739,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "l_sole",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -18872,7 +18924,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "r_sole",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -19057,7 +19109,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "l_sole",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -19248,7 +19300,7 @@ void torqueBalancingYogaModelClass::initialize()
                 "r_sole",
                 wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -19438,7 +19490,7 @@ void torqueBalancingYogaModelClass::initialize()
             params.storeParameter<std::string>(
                 "com", wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -19622,7 +19674,7 @@ void torqueBalancingYogaModelClass::initialize()
             params.storeParameter<std::string>(
                 "com", wbt::ParameterMetadata(wbt::ParameterType::STRING, 3.0, 1.0, 1.0, "Frame"));
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -19748,7 +19800,7 @@ void torqueBalancingYogaModelClass::initialize()
                 wbt::ParameterMetadata(
                     wbt::ParameterType::BOOL, 6.0, 1.0, 1.0, "ReadExternalSettlingTime"));
             params.storeParameter<double>(
-                0.0,
+                0.01,
                 wbt::ParameterMetadata(wbt::ParameterType::DOUBLE, 2.0, 1.0, 1.0, "SettlingTime"));
             params.storeParameter<double>(
                 0.01,
@@ -19864,7 +19916,7 @@ void torqueBalancingYogaModelClass::initialize()
         {
             // Create and store the CoderBlockInformation object
             wbt::CoderBlockInformation* blockInfo = new wbt::CoderBlockInformation();
-            torqueBalancingYoga_DW.QPTwoFeet_PWORK_l.blockPWork[1] = static_cast<void*>(blockInfo);
+            torqueBalancingYoga_DW.QPTwoFeet_PWORK_m.blockPWork[1] = static_cast<void*>(blockInfo);
 
             // Initialize the parameters
             // -------------------------
@@ -19910,10 +19962,10 @@ void torqueBalancingYogaModelClass::initialize()
 
             // Outputs
             blockInfo->setOutputSignal(
-                0, static_cast<void*>(&torqueBalancingYoga_B.QPTwoFeet_o1_j[0]), {1, 6});
+                0, static_cast<void*>(&torqueBalancingYoga_B.QPTwoFeet_o1_e[0]), {1, 6});
 
             blockInfo->setOutputSignal(
-                1, static_cast<void*>(&torqueBalancingYoga_B.QPTwoFeet_o2_h), {1, 1});
+                1, static_cast<void*>(&torqueBalancingYoga_B.QPTwoFeet_o2_b), {1, 1});
 
             // Initialize the class
             // --------------------
@@ -19980,7 +20032,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             // Store the block in the PWork vector
-            torqueBalancingYoga_DW.QPTwoFeet_PWORK_l.blockPWork[0] = static_cast<void*>(blockPtr);
+            torqueBalancingYoga_DW.QPTwoFeet_PWORK_m.blockPWork[0] = static_cast<void*>(blockPtr);
         }
 
         // End of S-Function Block: <S145>/QP Two Feet
@@ -20211,7 +20263,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -20395,7 +20447,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -20591,7 +20643,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -20789,7 +20841,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -20981,7 +21033,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -21176,7 +21228,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -21358,7 +21410,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -21555,7 +21607,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -21752,7 +21804,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -21949,7 +22001,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -22144,7 +22196,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -22326,7 +22378,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -22523,7 +22575,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -22720,7 +22772,7 @@ void torqueBalancingYogaModelClass::initialize()
             }
 
             params.storeParameter<std::string>(
-                "icubSim",
+                "icub",
                 wbt::ParameterMetadata(
                     wbt::ParameterType::STRUCT_STRING, 1.0, 1.0, 1.0, "RobotName"));
             params.storeParameter<std::string>(
@@ -23048,13 +23100,13 @@ void torqueBalancingYogaModelClass::initialize()
     torqueBal_MATLABFunction_l_Init(&torqueBalancingYoga_DW.sf_MATLABFunction_f);
 
     /* SystemInitialize for MATLAB Function: '<S69>/MATLAB Function' */
-    torqueBa_MATLABFunction_mb_Init(&torqueBalancingYoga_DW.sf_MATLABFunction_d);
+    torqueBa_MATLABFunction_mb_Init(&torqueBalancingYoga_DW.sf_MATLABFunction_d4);
 
     /* SystemInitialize for MATLAB Function: '<S95>/MATLAB Function' */
     torqueBalan_MATLABFunction_Init(&torqueBalancingYoga_DW.sf_MATLABFunction_ad);
 
     /* SystemInitialize for MATLAB Function: '<S96>/MATLAB Function' */
-    torqueBal_MATLABFunction_m_Init(&torqueBalancingYoga_DW.sf_MATLABFunction_jn);
+    torqueBal_MATLABFunction_m_Init(&torqueBalancingYoga_DW.sf_MATLABFunction_j);
 
     /* SystemInitialize for MATLAB Function: '<S34>/stateMachineYogaFCN' */
     torqueBalancingYoga_DW.state_not_empty = false;
@@ -23090,6 +23142,12 @@ void torqueBalancingYogaModelClass::initialize()
 
     /* SystemInitialize for MATLAB Function: '<S136>/MATLAB Function' */
     torqueBal_MATLABFunction_m_Init(&torqueBalancingYoga_DW.sf_MATLABFunction_l);
+
+    /* SystemInitialize for MATLAB Function: '<S157>/MATLAB Function' */
+    torqueBa_MATLABFunction_mb_Init(&torqueBalancingYoga_DW.sf_MATLABFunction_p);
+
+    /* SystemInitialize for MATLAB Function: '<S9>/Saturate the Torque Derivative' */
+    torqueBalancingYoga_DW.uPrev_not_empty = false;
 }
 
 /* Model terminate function */
@@ -25416,11 +25474,11 @@ void torqueBalancingYogaModelClass::terminate()
         // Get the CoderBlockInformation from the PWork
         wbt::CoderBlockInformation* blockInfo = nullptr;
         blockInfo = static_cast<wbt::CoderBlockInformation*>(
-            torqueBalancingYoga_DW.QPTwoFeet_PWORK_l.blockPWork[1]);
+            torqueBalancingYoga_DW.QPTwoFeet_PWORK_m.blockPWork[1]);
 
         // Get the Block from the PWork
         wbt::Block* blockPtr = nullptr;
-        blockPtr = static_cast<wbt::Block*>(torqueBalancingYoga_DW.QPTwoFeet_PWORK_l.blockPWork[0]);
+        blockPtr = static_cast<wbt::Block*>(torqueBalancingYoga_DW.QPTwoFeet_PWORK_m.blockPWork[0]);
 
         // Terminate the class
         // -------------------
@@ -26220,24 +26278,24 @@ torqueBalancingYogaModelClass::torqueBalancingYogaModelClass()
          2.0,
          2.0,
 
-         {1.0, 1.0, 1.0, 2.0, 2.0, 2.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2.0, 10.0},
+         {1.0, 1.0, 1.0, 0.9, 2.0, 2.0, 1.0, 1.0, 1.0, 0.9, 2.0, 2.0, 5.0},
          5.0,
          50.0,
          100.0,
-         0.01,
-         5.0,
+         0.02,
+         15.0,
          50.0,
          1.0,
 
-         {0.0, 0.0, 0.0, 0.0,   0.0, 0.0,   0.0, 0.0, 0.0, 0.0,    0.0, 0.0,  0.0,
-          0.0, 0.0, 0.0, 0.005, 0.0, -0.09, 0.0, 0.0, 0.0, -0.005, 0.0, 0.09, 0.0,
-          0.0, 0.0, 0.0, 0.0,   0.0, 0.0,   0.0, 0.0, 0.0, 0.0,    0.0, 0.0,  0.0},
+         {0.0, 0.0, 0.0,   0.0,   0.0, 0.02,  0.0, 0.0,   0.0,    0.0,    0.0, 0.02,  0.0,
+          0.0, 0.0, 0.005, 0.005, 0.0, -0.09, 0.0, 0.012, -0.015, -0.017, 0.0, 0.025, 0.0,
+          0.0, 0.0, 0.0,   0.0,   0.0, 0.0,   0.0, 0.0,   0.0,    0.0,    0.0, 0.0,   0.0},
          1.0,
          1.0,
          1,
          0,
          0,
-         0,
+         1,
          0,
          0,
 
@@ -26268,137 +26326,635 @@ torqueBalancingYogaModelClass::torqueBalancingYogaModelClass()
           0.0,     0.0225,  -0.1109, 0.0,     -0.1109, -0.0741, 0.0,     0.0,     -0.0014, -0.0014,
           0.0,     -0.0014, 0.0093,  0.0,     0.0093,  -0.0001, 0.0,     -0.0001, -0.0001, 0.0,
           0.0,     -0.0051, -0.0051, 0.0,     -0.0051, -0.002,  0.0,     -0.002,  0.0003,  0.0,
-          0.0003,  -0.012,  0.0,     0.0,     0.0073,  0.0073,  0.0,     0.0073,  0.0027,  0.0,
+          0.0003,  -0.012,  0.0,     0.0,     0.0073,  -0.106,  0.0,     0.0073,  0.0027,  0.0,
           0.0027,  0.016,   0.0,     0.016,   0.0252,  0.0,     0.0,     -0.1151, -0.1151, 0.0,
           -0.1151, -0.0277, 0.0,     -0.0277, 0.163,   0.0,     0.163,   0.1369,  0.0},
 
-         {0.0,     2.0,     4.0,     6.0,     8.0,     10.0,    12.0,    14.0,    16.0,    18.0,
-          20.0,    22.0,    24.0,    26.0,    28.0,    30.0,    32.0,    34.0,    36.0,    38.0,
-          40.0,    42.0,    44.0,    46.0,    48.0,    50.0,    -0.079,  -0.079,  -0.0852, -0.0852,
-          -0.079,  -0.0852, -0.0852, -0.0852, -0.0852, -0.0852, -0.0852, -0.0852, -0.0852, -0.0852,
-          -0.0852, -0.0852, -0.0852, -0.0852, -0.0852, -0.0852, -0.0852, -0.0852, -0.0852, -0.0852,
-          -0.0852, -0.0852, 0.2279,  0.2279,  -0.4273, -0.4273, -0.2273, -0.4273, -0.4273, -0.4273,
-          -0.4273, -0.4273, -0.4273, -0.4273, -0.4273, -0.4273, -0.4273, -0.4273, -0.4273, -0.4273,
-          -0.4273, -0.4273, -0.4273, -0.4273, -0.4273, -0.4273, -0.4273, -0.4273, 0.4519,  0.4519,
-          0.0821,  0.0821,  0.4519,  0.0821,  0.0821,  0.0821,  0.0821,  0.0821,  0.0821,  0.0821,
-          0.0821,  0.0821,  0.0821,  0.0821,  0.0821,  0.0821,  0.0821,  0.0821,  0.0821,  0.0821,
-          0.0821,  0.0821,  0.0821,  0.0821,  -1.1621, -1.1621, 0.1391,  0.1391,  -1.1621, 0.1391,
-          0.1391,  0.1391,  0.1391,  0.1391,  0.1391,  0.1391,  0.1391,  0.1391,  0.1391,  0.1391,
-          0.1391,  0.1391,  0.1391,  0.1391,  0.1391,  0.1391,  0.1391,  0.1391,  0.1391,  0.1391,
-          0.6663,  0.6663,  1.4585,  1.4585,  0.6663,  1.4585,  1.4585,  1.4585,  1.4585,  1.4585,
-          1.4585,  1.4585,  1.4585,  1.4585,  1.4585,  1.4585,  1.4585,  1.4585,  1.4585,  1.4585,
-          1.4585,  1.4585,  1.4585,  1.4585,  1.4585,  1.4585,  0.4919,  0.4965,  0.2464,  0.2464,
-          0.4965,  0.2464,  0.2464,  0.2464,  0.2464,  0.2464,  0.2464,  0.2464,  0.2464,  0.2464,
-          0.2464,  0.2464,  0.2464,  0.2464,  0.2464,  0.2464,  0.2464,  0.2464,  0.2464,  0.2464,
-          0.2464,  0.2464,  0.9947,  0.9947,  0.3042,  0.3042,  0.9947,  0.3042,  0.3042,  0.3042,
-          0.3042,  0.3042,  0.3042,  0.3042,  0.3042,  0.3042,  0.3042,  0.3042,  0.3042,  0.3042,
-          0.3042,  0.3042,  0.3042,  0.3042,  0.3042,  0.3042,  0.3042,  0.3042,  -1.0717, -1.0717,
-          -0.4181, -0.4181, -1.0717, -0.4181, -0.4181, -0.4181, -0.4181, -0.4181, -0.4181, -0.4181,
-          -0.4181, -0.4181, -0.4181, -0.4181, -0.4181, -0.4181, -0.4181, -0.4181, -0.4181, -0.4181,
-          -0.4181, -0.4181, -0.4181, -0.4181, 1.2904,  1.2904,  1.68,    1.68,    1.2904,  1.68,
-          1.68,    1.68,    1.68,    1.68,    1.68,    1.68,    1.68,    1.68,    1.68,    1.68,
-          1.68,    1.68,    1.68,    1.68,    1.68,    1.68,    1.68,    1.68,    1.68,    1.68,
-          -0.2447, -0.2493, 0.7373,  0.7373,  -0.2493, 0.7373,  0.7373,  0.7373,  0.7373,  0.7373,
-          0.7373,  0.7373,  0.7373,  0.7373,  0.7373,  0.7373,  0.7373,  0.7373,  0.7373,  0.7373,
-          0.7373,  0.7373,  0.7373,  0.7373,  0.7373,  0.7373,  1.0948,  1.0948,  0.3031,  0.3031,
-          1.0948,  0.3031,  0.3031,  0.3031,  0.3031,  0.3031,  0.3031,  0.3031,  0.3031,  0.3031,
-          0.3031,  0.3031,  0.3031,  0.3031,  0.3031,  0.3031,  0.3031,  0.3031,  0.3031,  0.3031,
-          0.3031,  0.3031,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,
-          0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,
-          0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.206,   0.206,
-          0.206,   0.3473,  0.4473,  0.6473,  0.6473,  0.6473,  0.6473,  0.6473,  0.6473,  0.6473,
-          0.6473,  0.6473,  0.6473,  0.6473,  0.6473,  0.6473,  0.6473,  0.6473,  0.6473,  0.6473,
-          0.6473,  0.6473,  0.6473,  0.6473,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,
-          0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,
-          0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,
-          -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741,
-          -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741,
-          -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1044, -0.1044, -0.1044, -0.1044,
-          -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044,
-          -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044,
-          -0.1044, -0.1044, 0.07,    0.07,    0.07,    0.07,    0.07,    0.07,    0.07,    0.07,
-          0.07,    0.07,    0.07,    0.07,    0.07,    0.07,    0.07,    0.07,    0.07,    0.07,
-          0.07,    0.07,    0.07,    0.07,    0.07,    0.07,    0.07,    0.07,    0.3484,  0.3714,
-          0.3714,  0.3514,  0.3514,  0.3514,  0.3514,  0.3514,  0.3514,  0.3514,  0.8514,  0.8514,
-          0.8514,  0.8514,  1.5514,  0.2514,  -0.3514, 0.3514,  0.8514,  0.8514,  0.8514,  0.8514,
-          1.5514,  0.2514,  -0.3514, 0.3514,  0.4008,  0.9599,  0.9599,  1.3107,  1.3107,  1.3107,
-          1.3107,  1.3107,  0.0107,  1.3107,  1.3107,  0.3107,  1.3107,  0.0107,  0.3107,  0.0107,
-          0.3107,  1.3107,  1.3107,  0.3107,  1.3107,  0.0107,  0.3107,  0.0107,  0.3107,  1.3107,
-          -0.0004, 1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,
-          1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,
-          1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  -0.3672, -1.6594, -1.6594, -0.0189,
-          -0.0189, -0.0189, -1.6217, -0.0189, -0.0189, -0.0189, -0.0189, -0.0189, -0.0189, -0.0189,
-          -0.0189, -0.0189, -0.0189, -0.0189, -0.0189, -0.0189, -0.0189, -0.0189, -0.0189, -0.0189,
-          -0.0189, -0.0189, -0.053,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,
-          0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,
-          0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  -0.0875, -0.0614,
-          -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614,
-          -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614,
-          -0.0614, -0.0614, -0.0614, -0.0614},
+         {0.0,     0.9,
+          1.8,     2.7,
+          3.6,     4.5,
+          5.4,     6.3,
+          7.2,     8.1,
+          9.0,     9.9,
+          10.8,    11.700000000000001,
+          12.6,    13.5,
+          14.4,    15.3,
+          16.2,    17.1,
+          18.0,    18.900000000000002,
+          19.8,    20.7,
+          21.6,    22.5,
+          -0.079,  -0.079,
+          -0.0852, -0.0852,
+          -0.079,  -0.0852,
+          -0.0852, -0.0852,
+          -0.0852, -0.0852,
+          -0.0852, -0.0852,
+          -0.0852, -0.0852,
+          -0.0852, -0.0852,
+          -0.0852, -0.0852,
+          -0.0852, -0.0852,
+          -0.0852, -0.0852,
+          -0.0852, -0.0852,
+          -0.0852, -0.0852,
+          0.2279,  0.2279,
+          -0.4273, -0.4273,
+          -0.2273, -0.4273,
+          -0.4273, -0.4273,
+          -0.4273, -0.4273,
+          -0.4273, -0.4273,
+          -0.4273, -0.4273,
+          -0.4273, -0.4273,
+          -0.4273, -0.4273,
+          -0.4273, -0.4273,
+          -0.4273, -0.4273,
+          -0.4273, -0.4273,
+          -0.4273, -0.4273,
+          0.4519,  0.4519,
+          0.0821,  0.0821,
+          0.4519,  0.0821,
+          0.0821,  0.0821,
+          0.0821,  0.0821,
+          0.0821,  0.0821,
+          0.0821,  0.0821,
+          0.0821,  0.0821,
+          0.0821,  0.0821,
+          0.0821,  0.0821,
+          0.0821,  0.0821,
+          0.0821,  0.0821,
+          0.0821,  0.0821,
+          -1.1621, -1.1621,
+          0.1391,  0.1391,
+          -1.1621, 0.1391,
+          0.1391,  0.1391,
+          0.1391,  0.1391,
+          0.1391,  0.1391,
+          0.1391,  0.1391,
+          0.1391,  0.1391,
+          0.1391,  0.1391,
+          0.1391,  0.1391,
+          0.1391,  0.1391,
+          0.1391,  0.1391,
+          0.1391,  0.1391,
+          0.6663,  0.6663,
+          1.4585,  1.4585,
+          0.6663,  1.4585,
+          1.4585,  1.4585,
+          1.4585,  1.4585,
+          1.4585,  1.4585,
+          1.4585,  1.4585,
+          1.4585,  1.4585,
+          1.4585,  1.4585,
+          1.4585,  1.4585,
+          1.4585,  1.4585,
+          1.4585,  1.4585,
+          1.4585,  1.4585,
+          0.4919,  0.4965,
+          0.2464,  0.2464,
+          0.4965,  0.2464,
+          0.2464,  0.2464,
+          0.2464,  0.2464,
+          0.2464,  0.2464,
+          0.2464,  0.2464,
+          0.2464,  0.2464,
+          0.2464,  0.2464,
+          0.2464,  0.2464,
+          0.2464,  0.2464,
+          0.2464,  0.2464,
+          0.2464,  0.2464,
+          0.9947,  0.9947,
+          0.3042,  0.3042,
+          0.9947,  0.3042,
+          0.3042,  0.3042,
+          0.3042,  0.3042,
+          0.3042,  0.3042,
+          0.3042,  0.3042,
+          0.3042,  0.3042,
+          0.3042,  0.3042,
+          0.3042,  0.3042,
+          0.3042,  0.3042,
+          0.3042,  0.3042,
+          0.3042,  0.3042,
+          -1.0717, -1.0717,
+          -0.4181, -0.4181,
+          -1.0717, -0.4181,
+          -0.4181, -0.4181,
+          -0.4181, -0.4181,
+          -0.4181, -0.4181,
+          -0.4181, -0.4181,
+          -0.4181, -0.4181,
+          -0.4181, -0.4181,
+          -0.4181, -0.4181,
+          -0.4181, -0.4181,
+          -0.4181, -0.4181,
+          -0.4181, -0.4181,
+          1.2904,  1.2904,
+          1.68,    1.68,
+          1.2904,  1.68,
+          1.68,    1.68,
+          1.68,    1.68,
+          1.68,    1.68,
+          1.68,    1.68,
+          1.68,    1.68,
+          1.68,    1.68,
+          1.68,    1.68,
+          1.68,    1.68,
+          1.68,    1.68,
+          1.68,    1.68,
+          -0.2447, -0.2493,
+          0.7373,  0.7373,
+          -0.2493, 0.7373,
+          0.7373,  0.7373,
+          0.7373,  0.7373,
+          0.7373,  0.7373,
+          0.7373,  0.7373,
+          0.7373,  0.7373,
+          0.7373,  0.7373,
+          0.7373,  0.7373,
+          0.7373,  0.7373,
+          0.7373,  0.7373,
+          0.7373,  0.7373,
+          1.0948,  1.0948,
+          0.3031,  0.3031,
+          1.0948,  0.3031,
+          0.3031,  0.3031,
+          0.3031,  0.3031,
+          0.3031,  0.3031,
+          0.3031,  0.3031,
+          0.3031,  0.3031,
+          0.3031,  0.3031,
+          0.3031,  0.3031,
+          0.3031,  0.3031,
+          0.3031,  0.3031,
+          0.3031,  0.3031,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.206,   0.206,
+          0.206,   0.3473,
+          0.4473,  0.6473,
+          0.6473,  0.6473,
+          0.6473,  0.6473,
+          0.6473,  0.6473,
+          0.6473,  0.6473,
+          0.6473,  0.6473,
+          0.6473,  0.6473,
+          0.6473,  0.6473,
+          0.6473,  0.6473,
+          0.6473,  0.6473,
+          0.6473,  0.6473,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.3484,  0.3714,
+          0.3714,  0.3514,
+          0.3514,  0.3514,
+          0.3514,  0.3514,
+          0.3514,  0.3514,
+          0.8514,  0.8514,
+          0.8514,  0.8514,
+          1.5514,  0.2514,
+          -0.3514, 0.3514,
+          0.8514,  0.8514,
+          0.8514,  0.8514,
+          1.5514,  0.2514,
+          -0.3514, 0.3514,
+          0.4008,  0.9599,
+          0.9599,  1.3107,
+          1.3107,  1.3107,
+          1.3107,  1.3107,
+          0.0107,  1.3107,
+          1.3107,  0.3107,
+          1.3107,  0.0107,
+          0.3107,  0.0107,
+          0.3107,  1.3107,
+          1.3107,  0.3107,
+          1.3107,  0.0107,
+          0.3107,  0.0107,
+          0.3107,  1.3107,
+          -0.0004, 1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          -0.3672, -1.6594,
+          -1.6594, -0.0189,
+          -0.0189, -0.0189,
+          -1.6217, -0.0189,
+          -0.0189, -0.0189,
+          -0.0189, -0.0189,
+          -0.0189, -0.0189,
+          -0.0189, -0.0189,
+          -0.0189, -0.0189,
+          -0.0189, -0.0189,
+          -0.0189, -0.0189,
+          -0.0189, -0.0189,
+          -0.0189, -0.0189,
+          -0.106,  -0.106,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          -0.0875, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614},
 
-         {0.0,     2.0,     4.0,     6.0,     8.0,     10.0,    12.0,    14.0,    16.0,    18.0,
-          20.0,    22.0,    24.0,    26.0,    28.0,    30.0,    32.0,    34.0,    36.0,    38.0,
-          40.0,    42.0,    44.0,    46.0,    48.0,    50.0,    -0.079,  -0.079,  -0.0852, -0.0852,
-          -0.079,  -0.0852, -0.0852, -0.0852, -0.0852, -0.0852, -0.0852, -0.0852, -0.0852, -0.0852,
-          -0.0852, -0.0852, -0.0852, -0.0852, -0.0852, -0.0852, -0.0852, -0.0852, -0.0852, -0.0852,
-          -0.0852, -0.0852, -0.2279, -0.2279, 0.4273,  0.4273,  0.2273,  0.4273,  0.4273,  0.4273,
-          0.4273,  0.4273,  0.4273,  0.4273,  0.4273,  0.4273,  0.4273,  0.4273,  0.4273,  0.4273,
-          0.4273,  0.4273,  0.4273,  0.4273,  0.4273,  0.4273,  0.4273,  0.4273,  -0.4519, -0.4519,
-          -0.0821, -0.0821, -0.4519, -0.0821, -0.0821, -0.0821, -0.0821, -0.0821, -0.0821, -0.0821,
-          -0.0821, -0.0821, -0.0821, -0.0821, -0.0821, -0.0821, -0.0821, -0.0821, -0.0821, -0.0821,
-          -0.0821, -0.0821, -0.0821, -0.0821, -1.0717, -1.0717, -0.4181, -0.4181, -1.0717, -0.4181,
-          -0.4181, -0.4181, -0.4181, -0.4181, -0.4181, -0.4181, -0.4181, -0.4181, -0.4181, -0.4181,
-          -0.4181, -0.4181, -0.4181, -0.4181, -0.4181, -0.4181, -0.4181, -0.4181, -0.4181, -0.4181,
-          1.2904,  1.2904,  1.68,    1.68,    1.2904,  1.68,    1.68,    1.68,    1.68,    1.68,
-          1.68,    1.68,    1.68,    1.68,    1.68,    1.68,    1.68,    1.68,    1.68,    1.68,
-          1.68,    1.68,    1.68,    1.68,    1.68,    1.68,    -0.2447, -0.2493, 0.7373,  0.7373,
-          -0.2493, 0.7373,  0.7373,  0.7373,  0.7373,  0.7373,  0.7373,  0.7373,  0.7373,  0.7373,
-          0.7373,  0.7373,  0.7373,  0.7373,  0.7373,  0.7373,  0.7373,  0.7373,  0.7373,  0.7373,
-          0.7373,  0.7373,  1.0948,  1.0948,  0.3031,  0.3031,  1.0948,  0.3031,  0.3031,  0.3031,
-          0.3031,  0.3031,  0.3031,  0.3031,  0.3031,  0.3031,  0.3031,  0.3031,  0.3031,  0.3031,
-          0.3031,  0.3031,  0.3031,  0.3031,  0.3031,  0.3031,  0.3031,  0.3031,  -1.1621, -1.1621,
-          0.1391,  0.1391,  -1.1621, 0.1391,  0.1391,  0.1391,  0.1391,  0.1391,  0.1391,  0.1391,
-          0.1391,  0.1391,  0.1391,  0.1391,  0.1391,  0.1391,  0.1391,  0.1391,  0.1391,  0.1391,
-          0.1391,  0.1391,  0.1391,  0.1391,  0.6663,  0.6663,  1.4585,  1.4585,  0.6663,  1.4585,
-          1.4585,  1.4585,  1.4585,  1.4585,  1.4585,  1.4585,  1.4585,  1.4585,  1.4585,  1.4585,
-          1.4585,  1.4585,  1.4585,  1.4585,  1.4585,  1.4585,  1.4585,  1.4585,  1.4585,  1.4585,
-          0.4919,  0.4965,  0.2464,  0.2464,  0.4965,  0.2464,  0.2464,  0.2464,  0.2464,  0.2464,
-          0.2464,  0.2464,  0.2464,  0.2464,  0.2464,  0.2464,  0.2464,  0.2464,  0.2464,  0.2464,
-          0.2464,  0.2464,  0.2464,  0.2464,  0.2464,  0.2464,  0.9947,  0.9947,  0.3042,  0.3042,
-          0.9947,  0.3042,  0.3042,  0.3042,  0.3042,  0.3042,  0.3042,  0.3042,  0.3042,  0.3042,
-          0.3042,  0.3042,  0.3042,  0.3042,  0.3042,  0.3042,  0.3042,  0.3042,  0.3042,  0.3042,
-          0.3042,  0.3042,  0.3484,  0.3714,  0.3714,  0.3514,  0.3514,  0.3514,  0.3514,  0.3514,
-          0.3514,  0.3514,  0.8514,  0.8514,  0.8514,  0.8514,  1.5514,  0.2514,  -0.3514, 0.3514,
-          0.8514,  0.8514,  0.8514,  0.8514,  1.5514,  0.2514,  -0.3514, 0.3514,  0.4008,  0.9599,
-          0.9599,  1.3107,  1.3107,  1.3107,  1.3107,  1.3107,  0.0107,  1.3107,  1.3107,  0.3107,
-          1.3107,  0.0107,  0.3107,  0.0107,  0.3107,  1.3107,  1.3107,  0.3107,  1.3107,  0.0107,
-          0.3107,  0.0107,  0.3107,  1.3107,  -0.0004, 1.3253,  1.3253,  1.3253,  1.3253,  1.3253,
-          1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,
-          1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,  1.3253,
-          -0.3672, -1.6594, -1.6594, -0.0189, -0.0189, -0.0189, -1.6217, -0.0189, -0.0189, -0.0189,
-          -0.0189, -0.0189, -0.0189, -0.0189, -0.0189, -0.0189, -0.0189, -0.0189, -0.0189, -0.0189,
-          -0.0189, -0.0189, -0.0189, -0.0189, -0.0189, -0.0189, -0.053,  0.6374,  0.6374,  0.6374,
-          0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,
-          0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,  0.6374,
-          0.6374,  0.6374,  -0.0875, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614,
-          -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614,
-          -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, -0.0614, 0.2092,  0.2092,
-          0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,
-          0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,  0.2092,
-          0.2092,  0.2092,  0.2092,  0.2092,  0.206,   0.206,   0.206,   0.3473,  0.4473,  0.6473,
-          0.6473,  0.6473,  0.6473,  0.6473,  0.6473,  0.6473,  0.6473,  0.6473,  0.6473,  0.6473,
-          0.6473,  0.6473,  0.6473,  0.6473,  0.6473,  0.6473,  0.6473,  0.6473,  0.6473,  0.6473,
-          0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,
-          0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,
-          0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  0.0006,  -0.1741, -0.1741, -0.1741, -0.1741,
-          -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741,
-          -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741, -0.1741,
-          -0.1741, -0.1741, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044,
-          -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044,
-          -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, -0.1044, 0.07,    0.07,
-          0.07,    0.07,    0.07,    0.07,    0.07,    0.07,    0.07,    0.07,    0.07,    0.07,
-          0.07,    0.07,    0.07,    0.07,    0.07,    0.07,    0.07,    0.07,    0.07,    0.07,
-          0.07,    0.07,    0.07,    0.07}},
+         {0.0,     0.9,
+          1.8,     2.7,
+          3.6,     4.5,
+          5.4,     6.3,
+          7.2,     8.1,
+          9.0,     9.9,
+          10.8,    11.700000000000001,
+          12.6,    13.5,
+          14.4,    15.3,
+          16.2,    17.1,
+          18.0,    18.900000000000002,
+          19.8,    20.7,
+          21.6,    22.5,
+          -0.079,  -0.079,
+          -0.0852, -0.0852,
+          -0.079,  -0.0852,
+          -0.0852, -0.0852,
+          -0.0852, -0.0852,
+          -0.0852, -0.0852,
+          -0.0852, -0.0852,
+          -0.0852, -0.0852,
+          -0.0852, -0.0852,
+          -0.0852, -0.0852,
+          -0.0852, -0.0852,
+          -0.0852, -0.0852,
+          -0.0852, -0.0852,
+          -0.2279, -0.2279,
+          0.4273,  0.4273,
+          0.2273,  0.4273,
+          0.4273,  0.4273,
+          0.4273,  0.4273,
+          0.4273,  0.4273,
+          0.4273,  0.4273,
+          0.4273,  0.4273,
+          0.4273,  0.4273,
+          0.4273,  0.4273,
+          0.4273,  0.4273,
+          0.4273,  0.4273,
+          0.4273,  0.4273,
+          -0.4519, -0.4519,
+          -0.0821, -0.0821,
+          -0.4519, -0.0821,
+          -0.0821, -0.0821,
+          -0.0821, -0.0821,
+          -0.0821, -0.0821,
+          -0.0821, -0.0821,
+          -0.0821, -0.0821,
+          -0.0821, -0.0821,
+          -0.0821, -0.0821,
+          -0.0821, -0.0821,
+          -0.0821, -0.0821,
+          -0.0821, -0.0821,
+          -1.0717, -1.0717,
+          -0.4181, -0.4181,
+          -1.0717, -0.4181,
+          -0.4181, -0.4181,
+          -0.4181, -0.4181,
+          -0.4181, -0.4181,
+          -0.4181, -0.4181,
+          -0.4181, -0.4181,
+          -0.4181, -0.4181,
+          -0.4181, -0.4181,
+          -0.4181, -0.4181,
+          -0.4181, -0.4181,
+          -0.4181, -0.4181,
+          1.2904,  1.2904,
+          1.68,    1.68,
+          1.2904,  1.68,
+          1.68,    1.68,
+          1.68,    1.68,
+          1.68,    1.68,
+          1.68,    1.68,
+          1.68,    1.68,
+          1.68,    1.68,
+          1.68,    1.68,
+          1.68,    1.68,
+          1.68,    1.68,
+          1.68,    1.68,
+          -0.2447, -0.2493,
+          0.7373,  0.7373,
+          -0.2493, 0.7373,
+          0.7373,  0.7373,
+          0.7373,  0.7373,
+          0.7373,  0.7373,
+          0.7373,  0.7373,
+          0.7373,  0.7373,
+          0.7373,  0.7373,
+          0.7373,  0.7373,
+          0.7373,  0.7373,
+          0.7373,  0.7373,
+          0.7373,  0.7373,
+          1.0948,  1.0948,
+          0.3031,  0.3031,
+          1.0948,  0.3031,
+          0.3031,  0.3031,
+          0.3031,  0.3031,
+          0.3031,  0.3031,
+          0.3031,  0.3031,
+          0.3031,  0.3031,
+          0.3031,  0.3031,
+          0.3031,  0.3031,
+          0.3031,  0.3031,
+          0.3031,  0.3031,
+          0.3031,  0.3031,
+          -1.1621, -1.1621,
+          0.1391,  0.1391,
+          -1.1621, 0.1391,
+          0.1391,  0.1391,
+          0.1391,  0.1391,
+          0.1391,  0.1391,
+          0.1391,  0.1391,
+          0.1391,  0.1391,
+          0.1391,  0.1391,
+          0.1391,  0.1391,
+          0.1391,  0.1391,
+          0.1391,  0.1391,
+          0.1391,  0.1391,
+          0.6663,  0.6663,
+          1.4585,  1.4585,
+          0.6663,  1.4585,
+          1.4585,  1.4585,
+          1.4585,  1.4585,
+          1.4585,  1.4585,
+          1.4585,  1.4585,
+          1.4585,  1.4585,
+          1.4585,  1.4585,
+          1.4585,  1.4585,
+          1.4585,  1.4585,
+          1.4585,  1.4585,
+          1.4585,  1.4585,
+          0.4919,  0.4965,
+          0.2464,  0.2464,
+          0.4965,  0.2464,
+          0.2464,  0.2464,
+          0.2464,  0.2464,
+          0.2464,  0.2464,
+          0.2464,  0.2464,
+          0.2464,  0.2464,
+          0.2464,  0.2464,
+          0.2464,  0.2464,
+          0.2464,  0.2464,
+          0.2464,  0.2464,
+          0.2464,  0.2464,
+          0.9947,  0.9947,
+          0.3042,  0.3042,
+          0.9947,  0.3042,
+          0.3042,  0.3042,
+          0.3042,  0.3042,
+          0.3042,  0.3042,
+          0.3042,  0.3042,
+          0.3042,  0.3042,
+          0.3042,  0.3042,
+          0.3042,  0.3042,
+          0.3042,  0.3042,
+          0.3042,  0.3042,
+          0.3042,  0.3042,
+          0.3484,  0.3714,
+          0.3714,  0.3514,
+          0.3514,  0.3514,
+          0.3514,  0.3514,
+          0.3514,  0.3514,
+          0.8514,  0.8514,
+          0.8514,  0.8514,
+          1.5514,  0.2514,
+          -0.3514, 0.3514,
+          0.8514,  0.8514,
+          0.8514,  0.8514,
+          1.5514,  0.2514,
+          -0.3514, 0.3514,
+          0.4008,  0.9599,
+          0.9599,  1.3107,
+          1.3107,  1.3107,
+          1.3107,  1.3107,
+          0.0107,  1.3107,
+          1.3107,  0.3107,
+          1.3107,  0.0107,
+          0.3107,  0.0107,
+          0.3107,  1.3107,
+          1.3107,  0.3107,
+          1.3107,  0.0107,
+          0.3107,  0.0107,
+          0.3107,  1.3107,
+          -0.0004, 1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          1.3253,  1.3253,
+          -0.3672, -1.6594,
+          -1.6594, -0.0189,
+          -0.0189, -0.0189,
+          -1.6217, -0.0189,
+          -0.0189, -0.0189,
+          -0.0189, -0.0189,
+          -0.0189, -0.0189,
+          -0.0189, -0.0189,
+          -0.0189, -0.0189,
+          -0.0189, -0.0189,
+          -0.0189, -0.0189,
+          -0.0189, -0.0189,
+          -0.0189, -0.0189,
+          -0.106,  -0.106,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          0.6374,  0.6374,
+          -0.0875, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          -0.0614, -0.0614,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.2092,  0.2092,
+          0.206,   0.206,
+          0.206,   0.3473,
+          0.4473,  0.6473,
+          0.6473,  0.6473,
+          0.6473,  0.6473,
+          0.6473,  0.6473,
+          0.6473,  0.6473,
+          0.6473,  0.6473,
+          0.6473,  0.6473,
+          0.6473,  0.6473,
+          0.6473,  0.6473,
+          0.6473,  0.6473,
+          0.6473,  0.6473,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          0.0006,  0.0006,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1741, -0.1741,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          -0.1044, -0.1044,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07,
+          0.07,    0.07}},
 
         /* Variable: Config
          * Referenced by:
@@ -26406,6 +26962,8 @@ torqueBalancingYogaModelClass::torqueBalancingYogaModelClass()
          *   '<S2>/ON_GAZEBO 3'
          *   '<S2>/ON_GAZEBO 4'
          *   '<S8>/ON_GAZEBO '
+         *   '<S9>/Saturate the Torque Derivative'
+         *   '<S9>/Constant'
          *   '<S32>/Reference Generator CoM'
          *   '<S32>/Constant'
          *   '<S32>/Constant1'
@@ -26436,8 +26994,8 @@ torqueBalancingYogaModelClass::torqueBalancingYogaModelClass()
          *   '<S127>/USE_IMU4EST_BASE1'
          *   '<S137>/USE_IMU4EST_BASE1'
          */
-        {10.0,
-         0,
+        {1200.0,
+         1,
          0,
          0,
          0,
@@ -26446,8 +27004,9 @@ torqueBalancingYogaModelClass::torqueBalancingYogaModelClass()
          1,
          0.01,
          1,
-         0,
-         0,
+         1,
+         1,
+         1,
          0,
          1,
          1,
@@ -26459,6 +27018,7 @@ torqueBalancingYogaModelClass::torqueBalancingYogaModelClass()
          0,
          1,
          1,
+         300.0,
          0.0,
 
          {0.0, 0.0, 0.0},
@@ -27030,36 +27590,535 @@ torqueBalancingYogaModelClass::torqueBalancingYogaModelClass()
           0.0,
           8.27e-6},
 
-         {1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-          0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0},
+         {0.0,
+          0.0,
+          0.54999999999999993,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.5,
+          0.5,
+          0.27499999999999997,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.5,
+          0.5,
+          0.27499999999999997,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -1.0,
+          -1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.625,
+          0.625,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.625,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.625,
+          -0.625,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.625,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0},
          0.0},
 
         /* Variable: Gain
@@ -27067,46 +28126,48 @@ torqueBalancingYogaModelClass::torqueBalancingYogaModelClass()
          *   '<S6>/Balancing Controller '
          *   '<S34>/stateMachineYogaFCN'
          */
-        {{50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0,
-          50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0,
-          10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0},
+        {{50.0,  50.0,  50.0,  50.0,  50.0,  50.0,  50.0,  50.0,  50.0,  50.0,  50.0,  50.0,  50.0,
+          100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 150.0, 100.0, 100.0, 100.0, 100.0, 100.0,
+          5.0,   5.0,   5.0,   5.0,   5.0,   5.0,   5.0,   5.0,   5.0,   5.0,   5.0,   5.0,   5.0},
 
-         {0.70710678118654757, 0.70710678118654757, 0.70710678118654757, 0.70710678118654757,
-          0.70710678118654757, 0.70710678118654757, 0.70710678118654757, 0.70710678118654757,
-          0.70710678118654757, 0.70710678118654757, 0.70710678118654757, 0.70710678118654757,
-          0.70710678118654757, 0.70710678118654757, 0.70710678118654757, 0.70710678118654757,
-          0.70710678118654757, 0.70710678118654757, 0.70710678118654757, 0.70710678118654757,
-          0.70710678118654757, 0.70710678118654757, 0.70710678118654757, 0.70710678118654757,
-          0.70710678118654757, 0.70710678118654757, 0.31622776601683794, 0.31622776601683794,
-          0.31622776601683794, 0.31622776601683794, 0.31622776601683794, 0.31622776601683794,
-          0.31622776601683794, 0.31622776601683794, 0.31622776601683794, 0.31622776601683794,
-          0.31622776601683794, 0.31622776601683794, 0.31622776601683794},
-         0.25,
-         1.0,
+         {0.94280904158206336, 0.94280904158206336, 0.94280904158206336, 0.94280904158206336,
+          0.94280904158206336, 0.94280904158206336, 0.94280904158206336, 0.94280904158206336,
+          0.94280904158206336, 0.94280904158206336, 0.94280904158206336, 0.94280904158206336,
+          0.94280904158206336, 1.3333333333333333,  1.3333333333333333,  1.3333333333333333,
+          1.3333333333333333,  1.3333333333333333,  1.3333333333333333,  1.3333333333333333,
+          1.6329931618554521,  1.3333333333333333,  1.3333333333333333,  1.3333333333333333,
+          1.3333333333333333,  1.3333333333333333,  0.29814239699997197, 0.29814239699997197,
+          0.29814239699997197, 0.29814239699997197, 0.29814239699997197, 0.29814239699997197,
+          0.29814239699997197, 0.29814239699997197, 0.29814239699997197, 0.29814239699997197,
+          0.29814239699997197, 0.29814239699997197, 0.29814239699997197},
+         3.0,
+         0.69282032302755092,
 
-         {10.0,  10.0,  10.0,  30.0,  30.0,  30.0,  10.0, 10.0,  10.0,  30.0,  30.0,  30.0,  10.0,
-          30.0,  30.0,  30.0,  30.0,  30.0,  30.0,  30.0, 30.0,  30.0,  30.0,  30.0,  30.0,  30.0,
-          20.0,  20.0,  20.0,  30.0,  30.0,  30.0,  20.0, 20.0,  20.0,  30.0,  30.0,  30.0,  20.0,
-          10.0,  10.0,  10.0,  10.0,  5.0,   10.0,  10.0, 10.0,  10.0,  10.0,  5.0,   10.0,  10.0,
-          10.0,  10.0,  10.0,  10.0,  5.0,   10.0,  10.0, 10.0,  10.0,  10.0,  5.0,   10.0,  10.0,
-          10.0,  10.0,  10.0,  10.0,  10.0,  20.0,  10.0, 10.0,  10.0,  10.0,  10.0,  20.0,  10.0,
-          8.0,   8.0,   8.0,   10.0,  10.0,  10.0,  8.0,  8.0,   8.0,   10.0,  10.0,  10.0,  8.0,
-          10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0, 10.0,  10.0,  10.0,  10.0,  10.0,  10.0,
-          10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0, 10.0,  10.0,  10.0,  10.0,  10.0,  10.0,
-          10.0,  10.0,  10.0,  10.0,  20.0,  20.0,  10.0, 10.0,  10.0,  10.0,  20.0,  20.0,  10.0,
-          8.0,   8.0,   8.0,   10.0,  10.0,  10.0,  8.0,  8.0,   8.0,   10.0,  10.0,  10.0,  8.0,
-          30.0,  30.0,  30.0,  100.0, 200.0, 100.0, 30.0, 30.0,  30.0,  100.0, 200.0, 100.0, 30.0,
-          30.0,  30.0,  50.0,  200.0, 250.0, 350.0, 50.0, 50.0,  30.0,  200.0, 250.0, 350.0, 30.0,
-          20.0,  20.0,  30.0,  100.0, 20.0,  20.0,  60.0, 60.0,  20.0,  100.0, 20.0,  20.0,  20.0,
-          20.0,  20.0,  60.0,  400.0, 20.0,  200.0, 30.0, 30.0,  20.0,  400.0, 20.0,  200.0, 20.0,
-          100.0, 100.0, 100.0, 100.0, 10.0,  10.0,  5.0,  100.0, 100.0, 100.0, 10.0,  10.0,  100.0,
-          100.0, 100.0, 100.0, 100.0, 50.0,  100.0, 5.0,  100.0, 100.0, 100.0, 50.0,  100.0, 100.0,
-          30.0,  30.0,  30.0,  100.0, 220.0, 220.0, 30.0, 30.0,  30.0,  100.0, 220.0, 220.0, 30.0,
-          50.0,  50.0,  30.0,  50.0,  350.0, 350.0, 30.0, 30.0,  50.0,  50.0,  350.0, 350.0, 50.0,
-          30.0,  30.0,  20.0,  30.0,  120.0, 120.0, 30.0, 30.0,  30.0,  30.0,  120.0, 120.0, 30.0,
-          60.0,  60.0,  20.0,  100.0, 200.0, 200.0, 20.0, 20.0,  60.0,  100.0, 200.0, 200.0, 60.0,
-          100.0, 100.0, 100.0, 100.0, 65.0,  65.0,  5.0,  100.0, 100.0, 100.0, 65.0,  65.0,  100.0,
-          100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 5.0,  100.0, 100.0, 100.0, 100.0, 100.0, 100.0},
+         {10.0,  10.0,  10.0,  90.0,  30.0,  30.0,  10.0,  10.0,  10.0,  90.0,  30.0,  30.0,
+          90.0,  30.0,  30.0,  30.0,  90.0,  30.0,  30.0,  30.0,  30.0,  30.0,  90.0,  30.0,
+          30.0,  120.0, 20.0,  20.0,  20.0,  90.0,  30.0,  30.0,  20.0,  20.0,  20.0,  90.0,
+          30.0,  30.0,  90.0,  10.0,  10.0,  10.0,  10.0,  5.0,   10.0,  10.0,  10.0,  10.0,
+          10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  5.0,   10.0,  10.0,  10.0,
+          10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  20.0,  10.0,
+          10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  8.0,   8.0,   8.0,   10.0,  10.0,  10.0,
+          8.0,   8.0,   8.0,   10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,
+          10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,
+          10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,
+          10.0,  20.0,  20.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  10.0,  8.0,   8.0,
+          8.0,   10.0,  10.0,  10.0,  8.0,   8.0,   8.0,   10.0,  10.0,  10.0,  10.0,  30.0,
+          30.0,  30.0,  100.0, 200.0, 100.0, 30.0,  30.0,  30.0,  100.0, 220.0, 220.0, 220.0,
+          30.0,  30.0,  50.0,  200.0, 250.0, 350.0, 50.0,  50.0,  50.0,  50.0,  550.0, 550.0,
+          550.0, 20.0,  20.0,  30.0,  100.0, 20.0,  20.0,  60.0,  60.0,  30.0,  30.0,  220.0,
+          220.0, 220.0, 20.0,  20.0,  60.0,  400.0, 20.0,  200.0, 30.0,  30.0,  60.0,  50.0,
+          200.0, 200.0, 200.0, 100.0, 100.0, 100.0, 100.0, 10.0,  10.0,  5.0,   100.0, 100.0,
+          100.0, 65.0,  65.0,  65.0,  100.0, 100.0, 100.0, 100.0, 10.0,  100.0, 5.0,   100.0,
+          100.0, 100.0, 300.0, 300.0, 300.0, 30.0,  30.0,  30.0,  100.0, 220.0, 440.0, 30.0,
+          30.0,  30.0,  100.0, 200.0, 100.0, 100.0, 50.0,  50.0,  30.0,  50.0,  550.0, 1100.0,
+          30.0,  30.0,  30.0,  200.0, 250.0, 350.0, 350.0, 30.0,  30.0,  20.0,  30.0,  220.0,
+          440.0, 30.0,  30.0,  20.0,  100.0, 20.0,  20.0,  20.0,  60.0,  60.0,  20.0,  50.0,
+          200.0, 400.0, 20.0,  20.0,  20.0,  100.0, 20.0,  200.0, 200.0, 100.0, 100.0, 100.0,
+          100.0, 65.0,  130.0, 5.0,   100.0, 100.0, 10.0,  10.0,  10.0,  10.0,  100.0, 100.0,
+          100.0, 100.0, 300.0, 600.0, 5.0,   100.0, 100.0, 10.0,  10.0,  100.0, 100.0},
 
          {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
           0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
@@ -27119,7 +28180,7 @@ torqueBalancingYogaModelClass::torqueBalancingYogaModelClass()
          *   '<S36>/Compute Base Velocity'
          *   '<S65>/Compute Base Velocity'
          */
-        {1.0e-7, 1.0, 1.0e-5, 0.1, 0.0, 1.0e-7},
+        {1.0e-7, 0.07, 1.0e-5, 0.1, 0.0, 1.0e-7},
 
         /* Variable: ConstraintsMatrix
          * Referenced by: '<S6>/Constant'
@@ -27371,6 +28432,11 @@ torqueBalancingYogaModelClass::torqueBalancingYogaModelClass()
          */
         0.0,
 
+        /* Mask Parameter: CompareToConstant_const_l
+         * Referenced by: '<S158>/Constant'
+         */
+        0.0,
+
         /* Mask Parameter: Coordinator_BitMask
          * Referenced by: '<S4>/Coordinator'
          */
@@ -27430,12 +28496,12 @@ torqueBalancingYogaModelClass::torqueBalancingYogaModelClass()
         /* Expression: diag(Gain.KP_COM)
          * Referenced by: '<S32>/Constant5'
          */
-        {50.0, 50.0, 10.0},
+        {50.0, 100.0, 5.0},
 
         /* Expression: diag(Gain.KD_COM)
          * Referenced by: '<S32>/Constant6'
          */
-        {0.70710678118654757, 0.70710678118654757, 0.31622776601683794},
+        {0.94280904158206336, 1.3333333333333333, 0.29814239699997197},
 
         /* Expression: 180/pi
          * Referenced by: '<S64>/Gain'

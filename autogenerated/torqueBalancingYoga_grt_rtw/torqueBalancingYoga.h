@@ -7,14 +7,14 @@
  *
  * Code generation for model "torqueBalancingYoga".
  *
- * Model version              : 1.3253
+ * Model version              : 1.3247
  * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C++ source code generated on : Wed May 23 14:31:10 2018
+ * C++ source code generated on : Thu Jun 14 15:19:54 2018
  *
  * Target selection: grt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
  * Embedded hardware selection: 32-bit Generic
- * Code generation objectives: Unspecified
+ * Code generation objective: Debugging
  * Validation result: Not run
  */
 
@@ -197,6 +197,7 @@ typedef struct
     real_T MinimumJerkTrajectoryGenerato_d[3]; /* '<S33>/Minimum Jerk Trajectory Generator2' */
     real_T MinimumJerkTrajectoryGenerato_b[3]; /* '<S33>/Minimum Jerk Trajectory Generator2' */
     real_T Switch_c[23]; /* '<S111>/Switch' */
+    real_T Constant_c; /* '<S158>/Constant' */
     real_T Saturation[23]; /* '<Root>/Saturation' */
     real_T SFunction_o1[23]; /* '<S152>/S-Function' */
     real_T SFunction_o2[23]; /* '<S152>/S-Function' */
@@ -205,8 +206,8 @@ typedef struct
     real_T reflectedInertia[529]; /* '<S111>/(transpose(T*Gamma))^{-1}*I_m*(T*Gamma)^{-1}' */
     real_T QPTwoFeet_o1[12]; /* '<S146>/QP Two Feet' */
     real_T QPTwoFeet_o2; /* '<S146>/QP Two Feet' */
-    real_T QPTwoFeet_o1_j[6]; /* '<S145>/QP Two Feet' */
-    real_T QPTwoFeet_o2_h; /* '<S145>/QP Two Feet' */
+    real_T QPTwoFeet_o1_e[6]; /* '<S145>/QP Two Feet' */
+    real_T QPTwoFeet_o2_b; /* '<S145>/QP Two Feet' */
     real_T nu_b_equivalent[6]; /* '<S109>/References for H' */
     real_T HessianMatrixQP1Foot[36]; /* '<S6>/Balancing Controller ' */
     real_T gradientQP1Foot[6]; /* '<S6>/Balancing Controller ' */
@@ -293,7 +294,7 @@ typedef struct
     real_T jointssmoothingTime; /* '<S32>/joints.smoothingTime' */
     real_T Constant5[3]; /* '<S32>/Constant5' */
     real_T Constant6[3]; /* '<S32>/Constant6' */
-    real_T nu_b_m[6]; /* '<S36>/Compute Base Velocity' */
+    real_T nu_b_l[6]; /* '<S36>/Compute Base Velocity' */
     real_T torso_n[23]; /* '<S10>/DoFs converter' */
     real_T left_arm_h[23]; /* '<S10>/DoFs converter' */
     real_T right_arm_p[23]; /* '<S10>/DoFs converter' */
@@ -351,9 +352,10 @@ typedef struct
     boolean_T USE_IMU4EST_BASE_g; /* '<S120>/USE_IMU4EST_BASE' */
     boolean_T SMOOTH_DES_COM; /* '<S33>/SMOOTH_DES_COM' */
     boolean_T HiddenBuf_InsertedFor_OneFoot_a; /* '<S142>/ContactsTransition' */
-    boolean_T not_a; /* '<S142>/not' */
+    boolean_T not_p; /* '<S142>/not' */
     boolean_T HiddenBuf_InsertedFor_TwoFeet_a; /* '<S142>/not' */
     boolean_T u_g; /* '<S111>/ ' */
+    boolean_T Constant_he; /* '<S9>/Constant' */
     boolean_T LogicalOperator1; /* '<S33>/Logical Operator1' */
     boolean_T LogicalOperator1_n; /* '<S2>/Logical Operator1' */
     boolean_T onOneFoot; /* '<S142>/ContactsTransition' */
@@ -365,6 +367,7 @@ typedef struct
     boolean_T USE_IMU4EST_BASE1_b; /* '<S49>/USE_IMU4EST_BASE1' */
     boolean_T USE_IMU4EST_BASE_c; /* '<S41>/USE_IMU4EST_BASE' */
     boolean_T Constant_ib; /* '<S32>/Constant' */
+    B_MATLABFunction_torqueBala_j_T sf_MATLABFunction_p; /* '<S157>/MATLAB Function' */
     B_MATLABFunction_torqueBala_f_T sf_MATLABFunction_l; /* '<S136>/MATLAB Function' */
     B_MATLABFunction_torqueBalanc_T sf_MATLABFunction_o; /* '<S135>/MATLAB Function' */
     B_fromImuToHomogeousTransform_T
@@ -373,9 +376,9 @@ typedef struct
     B_MATLABFunction_torqueBalanc_T sf_MATLABFunction; /* '<S125>/MATLAB Function' */
     B_fromImuToHomogeousTransform_T
         sf_fromImuToHomogeousTransformF; /* '<S118>/fromImuToHomogeousTransformFCN' */
-    B_MATLABFunction_torqueBala_j_T sf_MATLABFunction_d; /* '<S69>/MATLAB Function' */
+    B_MATLABFunction_torqueBala_j_T sf_MATLABFunction_d4; /* '<S69>/MATLAB Function' */
     B_MATLABFunction_torqueBala_p_T sf_MATLABFunction_f; /* '<S68>/MATLAB Function' */
-    B_MATLABFunction_torqueBala_f_T sf_MATLABFunction_jn; /* '<S96>/MATLAB Function' */
+    B_MATLABFunction_torqueBala_f_T sf_MATLABFunction_j; /* '<S96>/MATLAB Function' */
     B_MATLABFunction_torqueBalanc_T sf_MATLABFunction_ad; /* '<S95>/MATLAB Function' */
     B_fromImuToHomogeousTransform_T
         sf_fromImuToHomogeousTransfor_g; /* '<S80>/fromImuToHomogeousTransformFCN' */
@@ -394,6 +397,7 @@ typedef struct
 /* Block states (auto storage) for system '<Root>' */
 typedef struct
 {
+    real_T uPrev[23]; /* '<S9>/Saturate the Torque Derivative' */
     real_T state; /* '<S34>/stateMachineYogaFCN' */
     real_T tSwitch; /* '<S34>/stateMachineYogaFCN' */
     real_T w_H_fixedLink[16]; /* '<S34>/stateMachineYogaFCN' */
@@ -561,7 +565,7 @@ typedef struct
     struct
     {
         void* blockPWork[2];
-    } QPTwoFeet_PWORK_l; /* '<S145>/QP Two Feet' */
+    } QPTwoFeet_PWORK_m; /* '<S145>/QP Two Feet' */
 
     struct
     {
@@ -758,6 +762,7 @@ typedef struct
         void* blockPWork[2];
     } DoFsconverter5_PWORK; /* '<S10>/DoFs converter5' */
 
+    boolean_T uPrev_not_empty; /* '<S9>/Saturate the Torque Derivative' */
     boolean_T state_not_empty; /* '<S34>/stateMachineYogaFCN' */
     boolean_T tSwitch_not_empty; /* '<S34>/stateMachineYogaFCN' */
     boolean_T w_H_fixedLink_not_empty; /* '<S34>/stateMachineYogaFCN' */
@@ -768,13 +773,14 @@ typedef struct
     boolean_T VisualizeGainTuning_MODE; /* '<S33>/Visualize Gain Tuning  ' */
     boolean_T InternalCoordinator_MODE; /* '<S4>/Internal Coordinator' */
     boolean_T Visualizer_MODE; /* '<S2>/Visualizer' */
+    DW_MATLABFunction_torqueBal_l_T sf_MATLABFunction_p; /* '<S157>/MATLAB Function' */
     DW_MATLABFunction_torqueBal_k_T sf_MATLABFunction_l; /* '<S136>/MATLAB Function' */
     DW_MATLABFunction_torqueBalan_T sf_MATLABFunction_o; /* '<S135>/MATLAB Function' */
     DW_MATLABFunction_torqueBal_k_T sf_MATLABFunction_h; /* '<S126>/MATLAB Function' */
     DW_MATLABFunction_torqueBalan_T sf_MATLABFunction; /* '<S125>/MATLAB Function' */
-    DW_MATLABFunction_torqueBal_l_T sf_MATLABFunction_d; /* '<S69>/MATLAB Function' */
+    DW_MATLABFunction_torqueBal_l_T sf_MATLABFunction_d4; /* '<S69>/MATLAB Function' */
     DW_MATLABFunction_torqueBal_e_T sf_MATLABFunction_f; /* '<S68>/MATLAB Function' */
-    DW_MATLABFunction_torqueBal_k_T sf_MATLABFunction_jn; /* '<S96>/MATLAB Function' */
+    DW_MATLABFunction_torqueBal_k_T sf_MATLABFunction_j; /* '<S96>/MATLAB Function' */
     DW_MATLABFunction_torqueBalan_T sf_MATLABFunction_ad; /* '<S95>/MATLAB Function' */
     DW_MATLABFunction_torqueBal_k_T sf_MATLABFunction_oa; /* '<S86>/MATLAB Function' */
     DW_MATLABFunction_torqueBalan_T sf_MATLABFunction_i; /* '<S85>/MATLAB Function' */
@@ -792,12 +798,14 @@ struct P_torqueBalancingYoga_T_
                                        *   '<S32>/joints.smoothingTime'
                                        *   '<S34>/stateMachineYogaFCN'
                                        */
-    struct_nKwr8yfDbWZ5195E5duazE Config; /* Variable: Config
+    struct_hu1Fw0wiIZUzALhhiDLesH Config; /* Variable: Config
                                            * Referenced by:
                                            *   '<Root>/ON_GAZEBO 1'
                                            *   '<S2>/ON_GAZEBO 3'
                                            *   '<S2>/ON_GAZEBO 4'
                                            *   '<S8>/ON_GAZEBO '
+                                           *   '<S9>/Saturate the Torque Derivative'
+                                           *   '<S9>/Constant'
                                            *   '<S32>/Reference Generator CoM'
                                            *   '<S32>/Constant'
                                            *   '<S32>/Constant1'
@@ -894,6 +902,9 @@ struct P_torqueBalancingYoga_T_
     real_T CompareToConstant_const_e5; /* Mask Parameter: CompareToConstant_const_e5
                                         * Referenced by: '<S140>/Constant'
                                         */
+    real_T CompareToConstant_const_l; /* Mask Parameter: CompareToConstant_const_l
+                                       * Referenced by: '<S158>/Constant'
+                                       */
     uint8_T Coordinator_BitMask; /* Mask Parameter: Coordinator_BitMask
                                   * Referenced by: '<S4>/Coordinator'
                                   */
@@ -1057,38 +1068,38 @@ private:
     RT_MODEL_torqueBalancingYoga_T torqueBalancingYoga_M;
 
     /* private member function(s) for subsystem '<Root>'*/
-    void torqueBalancingYoga_xswap_g(real_T x[529], int32_T ix0, int32_T iy0);
-    void torqueBalancingYoga_xgetrf_m(real_T A[529], int32_T ipiv[23], int32_T* info);
-    void torqueBalancingYoga_xtrsm_l(const real_T A[529], real_T B[529]);
-    void torqueBalancingYoga_xtrsm_lc(const real_T A[529], real_T B[529]);
-    void torqueBalancingYoga_mrdivide_g(const real_T A[529], const real_T B[529], real_T y[529]);
+    void torqueBalancingYoga_xswap_p(real_T x[529], int32_T ix0, int32_T iy0);
+    void torqueBalancingYoga_xgetrf_f(real_T A[529], int32_T ipiv[23], int32_T* info);
+    void torqueBalancingYoga_xtrsm_h(const real_T A[529], real_T B[529]);
+    void torqueBalancingYoga_xtrsm_hm(const real_T A[529], real_T B[529]);
+    void torqueBalancingYoga_mrdivide_f(const real_T A[529], const real_T B[529], real_T y[529]);
     void torqueBalancingYoga_eye(real_T I[16]);
-    void torqueBalancingYoga_xgetrf_f(real_T A[16], int32_T ipiv[4], int32_T* info);
-    void torqueBalancingYoga_mrdivide_l(real_T A[16], const real_T B[16]);
-    void torqueBalancingYoga_mldivide_a(const real_T A[16], real_T B[4]);
+    void torqueBalancingYoga_xgetrf_k(real_T A[16], int32_T ipiv[4], int32_T* info);
+    void torqueBalancingYoga_mrdivide_d(real_T A[16], const real_T B[16]);
+    void torqueBalancingYoga_mldivide_n(const real_T A[16], real_T B[4]);
     real_T torqueBalancingYoga_norm(const real_T x[6]);
-    real_T torqueBalancingYoga_norm_p(const real_T x[2]);
-    void torqueBalancingYoga_mldivide_m(const real_T A[36], real_T B[72]);
+    real_T torqueBalancingYoga_norm_i(const real_T x[2]);
+    void torqueBalancingYoga_mldivide_f(const real_T A[36], real_T B[72]);
     void torqueBalancingYoga_mldivide(const real_T A[36], real_T B[72]);
     void torqueBalancingYoga_xswap(real_T x[529], int32_T ix0, int32_T iy0);
-    void torqueBalancingYoga_xgetrf_l(real_T A[529], int32_T ipiv[23], int32_T* info);
+    void torqueBalancingYoga_xgetrf_a(real_T A[529], int32_T ipiv[23], int32_T* info);
     void torqueBalancingYoga_xtrsm(const real_T A[529], real_T B[529]);
-    void torqueBalancingYoga_xtrsm_d(const real_T A[529], real_T B[529]);
+    void torqueBalancingYoga_xtrsm_j(const real_T A[529], real_T B[529]);
     void torqueBalancingYoga_mrdivide(const real_T A[529], const real_T B[529], real_T y[529]);
-    void torqueBala_computeMotorsInertia(const struct_nKwr8yfDbWZ5195E5duazE* b_Config,
+    void torqueBala_computeMotorsInertia(const struct_hu1Fw0wiIZUzALhhiDLesH* b_Config,
                                          real_T reflectedInertia[529]);
-    void torqueBalancingYoga_mldivide_e(const real_T A[36], real_T B[36]);
+    void torqueBalancingYoga_mldivide_h(const real_T A[36], real_T B[36]);
     void torqueBalancingYoga_xzgetrf(real_T A[36], int32_T ipiv[6], int32_T* info);
     void torqueBalancingYoga_inv(const real_T x[36], real_T y[36]);
     real_T torqueBalancingYoga_xnrm2(int32_T n, const real_T x[72], int32_T ix0);
-    real_T torqueBalancingYoga_xnrm2_f(int32_T n, const real_T x[6], int32_T ix0);
-    void torqueBalancingYoga_xaxpy_kt(int32_T n,
+    real_T torqueBalancingYoga_xnrm2_a(int32_T n, const real_T x[6], int32_T ix0);
+    void torqueBalancingYoga_xaxpy_i5(int32_T n,
                                       real_T a,
                                       const real_T x[12],
                                       int32_T ix0,
                                       real_T y[72],
                                       int32_T iy0);
-    void torqueBalancingYoga_xaxpy_k(int32_T n,
+    void torqueBalancingYoga_xaxpy_i(int32_T n,
                                      real_T a,
                                      const real_T x[72],
                                      int32_T ix0,
@@ -1100,72 +1111,72 @@ private:
                                      const real_T y[72],
                                      int32_T iy0);
     void torqueBalancingYoga_xaxpy(int32_T n, real_T a, int32_T ix0, real_T y[72], int32_T iy0);
-    real_T torqueBalancingYoga_xdotc_p(int32_T n,
+    real_T torqueBalancingYoga_xdotc_a(int32_T n,
                                        const real_T x[36],
                                        int32_T ix0,
                                        const real_T y[36],
                                        int32_T iy0);
-    void torqueBalancingYoga_xaxpy_kto(int32_T n, real_T a, int32_T ix0, real_T y[36], int32_T iy0);
+    void torqueBalancingYoga_xaxpy_i5v(int32_T n, real_T a, int32_T ix0, real_T y[36], int32_T iy0);
     void torqueBalancingYoga_xscal(real_T a, real_T x[72], int32_T ix0);
     void torqueBalancingYoga_xscal_k(real_T a, real_T x[36], int32_T ix0);
-    void torqueBalancingYoga_xswap_m(real_T x[36], int32_T ix0, int32_T iy0);
-    void torqueBalancingYoga_xswap_mk(real_T x[72], int32_T ix0, int32_T iy0);
+    void torqueBalancingYoga_xswap_a(real_T x[36], int32_T ix0, int32_T iy0);
+    void torqueBalancingYoga_xswap_ao(real_T x[72], int32_T ix0, int32_T iy0);
     void torqueBalancingYoga_xrotg(real_T* a, real_T* b, real_T* c, real_T* s);
     void torqueBalancingYoga_xrot(real_T x[36], int32_T ix0, int32_T iy0, real_T c, real_T s);
-    void torqueBalancingYoga_xrot_c(real_T x[72], int32_T ix0, int32_T iy0, real_T c, real_T s);
+    void torqueBalancingYoga_xrot_n(real_T x[72], int32_T ix0, int32_T iy0, real_T c, real_T s);
     void torqueBalancingYoga_svd(const real_T A[72], real_T U[72], real_T s[6], real_T V[36]);
     void torqueBalancingYoga_pinv(const real_T A[72], real_T tol, real_T X[72]);
-    void torqueBalancingYoga_eye_m(real_T I[144]);
-    void torqueBalancingYoga_xswap_mks(real_T x[841], int32_T ix0, int32_T iy0);
-    void torqueBalancingYoga_xgetrf_g(real_T A[841], int32_T ipiv[29], int32_T* info);
-    void torqueBalancingYoga_xtrsm_b(const real_T A[841], real_T B[348]);
-    void torqueBalancingYoga_xtrsm_bp(const real_T A[841], real_T B[348]);
-    void torqueBalancingYoga_mrdivide_a(const real_T A[348], const real_T B[841], real_T y[348]);
-    void torqueBalancingYoga_mrdivide_al(real_T A[138], const real_T B[36]);
+    void torqueBalancingYoga_eye_h(real_T I[144]);
+    void torqueBalancingYoga_xswap_ao0(real_T x[841], int32_T ix0, int32_T iy0);
+    void torqueBalancingYoga_xgetrf_p(real_T A[841], int32_T ipiv[29], int32_T* info);
+    void torqueBalancingYoga_xtrsm_a(const real_T A[841], real_T B[348]);
+    void torqueBalancingYoga_xtrsm_aw(const real_T A[841], real_T B[348]);
+    void torqueBalancingYoga_mrdivide_n(const real_T A[348], const real_T B[841], real_T y[348]);
+    void torqueBalancingYoga_mrdivide_ne(real_T A[138], const real_T B[36]);
     void torqueBalancingYoga_pinvDamped(const real_T A[276], real_T regDamp, real_T pinvDampA[276]);
-    void torqueBalancingYoga_eye_mj(real_T I[529]);
+    void torqueBalancingYoga_eye_hp(real_T I[529]);
     void torqueBalancingYoga_blkdiag(const real_T varargin_1[9],
                                      const real_T varargin_2[9],
                                      real_T y[36]);
-    void torqueBalancingYoga_blkdiag_l(const real_T varargin_1[114],
+    void torqueBalancingYoga_blkdiag_b(const real_T varargin_1[114],
                                        const real_T varargin_2[114],
                                        real_T y[456]);
     void torqueBalancingYoga_diag(const real_T v[23], real_T d[529]);
-    real_T torqueBalancingYoga_xnrm2_fe(int32_T n, const real_T x[529], int32_T ix0);
-    real_T torqueBalancingYoga_xnrm2_fes(int32_T n, const real_T x[23], int32_T ix0);
-    void torqueBalancingYog_xaxpy_ktoigf(int32_T n,
+    real_T torqueBalancingYoga_xnrm2_ap(int32_T n, const real_T x[529], int32_T ix0);
+    real_T torqueBalancingYoga_xnrm2_ap0(int32_T n, const real_T x[23], int32_T ix0);
+    void torqueBalancingYog_xaxpy_i5v01w(int32_T n,
                                          real_T a,
                                          const real_T x[23],
                                          int32_T ix0,
                                          real_T y[529],
                                          int32_T iy0);
-    void torqueBalancingYoga_xaxpy_ktoig(int32_T n,
+    void torqueBalancingYoga_xaxpy_i5v01(int32_T n,
                                          real_T a,
                                          const real_T x[529],
                                          int32_T ix0,
                                          real_T y[23],
                                          int32_T iy0);
-    real_T torqueBalancingYoga_xdotc_pe(int32_T n,
+    real_T torqueBalancingYoga_xdotc_a2(int32_T n,
                                         const real_T x[529],
                                         int32_T ix0,
                                         const real_T y[529],
                                         int32_T iy0);
     void
-    torqueBalancingYoga_xaxpy_ktoi(int32_T n, real_T a, int32_T ix0, real_T y[529], int32_T iy0);
-    void torqueBalancingYoga_xscal_kg(real_T a, real_T x[529], int32_T ix0);
-    void torqueBalancingYoga_xswap_mksh(real_T x[529], int32_T ix0, int32_T iy0);
-    void torqueBalancingYoga_xrot_cm(real_T x[529], int32_T ix0, int32_T iy0, real_T c, real_T s);
-    void torqueBalancingYoga_svd_g(const real_T A[529], real_T U[529], real_T s[23], real_T V[529]);
+    torqueBalancingYoga_xaxpy_i5v0(int32_T n, real_T a, int32_T ix0, real_T y[529], int32_T iy0);
+    void torqueBalancingYoga_xscal_ks(real_T a, real_T x[529], int32_T ix0);
+    void torqueBalancingYoga_xswap_ao0c(real_T x[529], int32_T ix0, int32_T iy0);
+    void torqueBalancingYoga_xrot_nr(real_T x[529], int32_T ix0, int32_T iy0, real_T c, real_T s);
+    void torqueBalancingYoga_svd_d(const real_T A[529], real_T U[529], real_T s[23], real_T V[529]);
     void
     torqueBalancingYoga_xgemm(int32_T k, const real_T A[529], const real_T B[529], real_T C[529]);
-    void torqueBalancingYoga_pinv_d(const real_T A[529], real_T tol, real_T X[529]);
-    void torqueBalancingYoga_diag_h(const real_T v[23], real_T d[529]);
-    void torqueBalancingYoga_xswap_mkshm(real_T x[529], int32_T ix0, int32_T iy0);
-    void torqueBalancingYoga_xgetrf_gr(real_T A[529], int32_T ipiv[23], int32_T* info);
-    void torqueBalancingYoga_xtrsm_bps(const real_T A[529], real_T B[276]);
-    void torqueBalancingYoga_xtrsm_bpsu(const real_T A[529], real_T B[276]);
+    void torqueBalancingYoga_pinv_i(const real_T A[529], real_T tol, real_T X[529]);
+    void torqueBalancingYoga_diag_a(const real_T v[23], real_T d[529]);
+    void torqueBalancingYoga_xswap_ao0cq(real_T x[529], int32_T ix0, int32_T iy0);
+    void torqueBalancingYoga_xgetrf_pd(real_T A[529], int32_T ipiv[23], int32_T* info);
+    void torqueBalancingYoga_xtrsm_awk(const real_T A[529], real_T B[276]);
+    void torqueBalancingYoga_xtrsm_awkh(const real_T A[529], real_T B[276]);
     void
-    torqueBalancingYog_pinvDamped_l(const real_T A[276], real_T regDamp, real_T pinvDampA[276]);
+    torqueBalancingYog_pinvDamped_b(const real_T A[276], real_T regDamp, real_T pinvDampA[276]);
 };
 
 /*-
@@ -1435,5 +1446,8 @@ private:
  * '<S154>' : 'torqueBalancingYoga/synchronizer/GAZEBO_SYNCHRONIZER'
  * '<S155>' : 'torqueBalancingYoga/synchronizer/REAL_TIME_SYNC'
  * '<S156>' : 'torqueBalancingYoga/tauDot Saturation/Saturate the Torque Derivative'
+ * '<S157>' : 'torqueBalancingYoga/tauDot Saturation/holder '
+ * '<S158>' : 'torqueBalancingYoga/tauDot Saturation/holder /Compare To Constant'
+ * '<S159>' : 'torqueBalancingYoga/tauDot Saturation/holder /MATLAB Function'
  */
 #endif /* RTW_HEADER_torqueBalancingYoga_h_ */
