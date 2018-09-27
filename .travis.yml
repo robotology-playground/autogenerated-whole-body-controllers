@@ -66,9 +66,6 @@ install:
   - cd $HOME/git
   - git clone --depth 1 https://github.com/robotology/ycm.git
   - cd ycm
-  - git remote add diegoferigo https://github.com/diegoferigo/ycm.git
-  - git fetch diegoferigo
-  - git checkout feature/ibpf_includefile
   - mkdir build && cd build
   - >-
     cmake .. \
@@ -129,9 +126,6 @@ install:
   - cd $HOME/git
   - git clone --depth 1 https://github.com/robotology/wb-toolbox.git
   - cd wb-toolbox
-  - git remote add diegoferigo https://github.com/diegoferigo/wb-toolbox.git
-  - git fetch diegoferigo
-  - git checkout release/4
   - mkdir build && cd build
   - >-
     cmake .. \
