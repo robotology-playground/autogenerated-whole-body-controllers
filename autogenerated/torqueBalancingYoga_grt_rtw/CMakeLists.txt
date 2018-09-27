@@ -13,8 +13,7 @@ set(CODER_MAIN "CoderMain_${MDL_NAME}")
 configure_file(
     "${CMAKE_SOURCE_DIR}/src/driver.cpp.in"
     "${CMAKE_CURRENT_BINARY_DIR}/driver.cpp"
-    @ONLY
-    )
+    @ONLY)
 
 add_executable(${CODER_MAIN}
     "${CMAKE_CURRENT_BINARY_DIR}/driver.cpp"

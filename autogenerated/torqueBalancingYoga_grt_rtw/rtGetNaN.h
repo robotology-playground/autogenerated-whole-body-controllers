@@ -7,9 +7,9 @@
  *
  * Code generation for model "torqueBalancingYoga".
  *
- * Model version              : 1.3248
- * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C++ source code generated on : Wed May 23 12:35:53 2018
+ * Model version              : 1.3291
+ * Simulink Coder version : 8.14 (R2018a) 06-Feb-2018
+ * C++ source code generated on : Thu Sep 27 14:12:37 2018
  *
  * Target selection: grt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
