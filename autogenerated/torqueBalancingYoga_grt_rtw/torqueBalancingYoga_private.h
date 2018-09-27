@@ -7,9 +7,9 @@
  *
  * Code generation for model "torqueBalancingYoga".
  *
- * Model version              : 1.3253
- * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C++ source code generated on : Wed May 23 14:31:10 2018
+ * Model version              : 1.3292
+ * Simulink Coder version : 8.14 (R2018a) 06-Feb-2018
+ * C++ source code generated on : Thu Sep 27 14:38:56 2018
  *
  * Target selection: grt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -31,10 +31,6 @@
 
 #ifndef rtmIsMinorTimeStep
 #define rtmIsMinorTimeStep(rtm) (((rtm)->Timing.simTimeStep) == MINOR_TIME_STEP)
-#endif
-
-#ifndef rtmGetTPtr
-#define rtmGetTPtr(rtm) ((rtm)->Timing.t)
 #endif
 
 #ifndef rtmSetTPtr

@@ -7,9 +7,9 @@
  *
  * Code generation for model "torqueBalancingYoga".
  *
- * Model version              : 1.3253
- * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C++ source code generated on : Wed May 23 14:31:10 2018
+ * Model version              : 1.3292
+ * Simulink Coder version : 8.14 (R2018a) 06-Feb-2018
+ * C++ source code generated on : Thu Sep 27 14:38:56 2018
  *
  * Target selection: grt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -22,8 +22,8 @@
 #define RTW_HEADER_torqueBalancingYoga_types_h_
 #include "rtwtypes.h"
 #include "multiword_types.h"
-#ifndef DEFINED_TYPEDEF_FOR_struct_nKwr8yfDbWZ5195E5duazE_
-#define DEFINED_TYPEDEF_FOR_struct_nKwr8yfDbWZ5195E5duazE_
+#ifndef DEFINED_TYPEDEF_FOR_struct_JFJmPMlc0Zv9CJd3pEkJyG_
+#define DEFINED_TYPEDEF_FOR_struct_JFJmPMlc0Zv9CJd3pEkJyG_
 
 typedef struct
 {
@@ -33,10 +33,14 @@ typedef struct
     boolean_T SCOPES_GAIN_SCHE_INFO;
     boolean_T SCOPES_MAIN;
     boolean_T SCOPES_QP;
+    boolean_T SCOPES_INERTIA;
     boolean_T CHECK_LIMITS;
     boolean_T SAVE_WORKSPACE;
+    boolean_T CHECK_INTEGRATION_TIME;
     real_T Ts;
     boolean_T ON_GAZEBO;
+    real_T numOfJointsForEachControlboard[5];
+    boolean_T SATURATE_TORQUE_DERIVATIVE;
     boolean_T USE_MOTOR_REFLECTED_INERTIA;
     boolean_T INCLUDE_COUPLING;
     boolean_T USE_IMU4EST_BASE;
@@ -49,6 +53,7 @@ typedef struct
     boolean_T DEMO_MOVEMENTS;
     boolean_T SMOOTH_COM_DES;
     boolean_T SMOOTH_JOINT_DES;
+    real_T tauDot_maxAbs;
     real_T noOscillationTime;
     real_T directionOfOscillation[3];
     real_T amplitudeOfOscillation;
@@ -57,12 +62,12 @@ typedef struct
     real_T I_m[529];
     real_T T[529];
     real_T K_ff;
-} struct_nKwr8yfDbWZ5195E5duazE;
+} struct_JFJmPMlc0Zv9CJd3pEkJyG;
 
 #endif
 
-#ifndef DEFINED_TYPEDEF_FOR_struct_xTYJupe8umqLUY4vWPaUnH_
-#define DEFINED_TYPEDEF_FOR_struct_xTYJupe8umqLUY4vWPaUnH_
+#ifndef DEFINED_TYPEDEF_FOR_struct_7ihouVNoAY8wd4f70WjkX_
+#define DEFINED_TYPEDEF_FOR_struct_7ihouVNoAY8wd4f70WjkX_
 
 typedef struct
 {
@@ -70,6 +75,7 @@ typedef struct
     real_T SM_MASK_YOGA;
     real_T SM_TYPE_BIN;
     real_T smoothingTimeCoM_Joints[13];
+    real_T scaleFactorSmoothingTime;
     real_T joints_pauseBetweenYogaMoves;
     real_T wrench_thresholdContactOn;
     real_T wrench_thresholdContactOff;
@@ -86,10 +92,15 @@ typedef struct
     boolean_T demoStartsOnRightSupport;
     boolean_T yogaAlsoOnRightFoot;
     boolean_T yogaInLoop;
+    boolean_T repeatYogaMoveset;
+    real_T smoothingTimeSecondYogaLeft;
+    real_T smoothingTimeSecondYogaRight;
     real_T joints_references[299];
     real_T joints_leftYogaRef[624];
     real_T joints_rightYogaRef[624];
-} struct_xTYJupe8umqLUY4vWPaUnH;
+    real_T joints_leftSecondYogaRef[26];
+    real_T joints_rightSecondYogaRef[26];
+} struct_7ihouVNoAY8wd4f70WjkX;
 
 #endif
 
@@ -134,7 +145,7 @@ typedef struct
 
 #endif
 
-/* Parameters (auto storage) */
+/* Parameters (default storage) */
 typedef struct P_torqueBalancingYoga_T_ P_torqueBalancingYoga_T;
 
 /* Forward declaration for rtModel */
