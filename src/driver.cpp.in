@@ -2,7 +2,7 @@
 #error "Windows is not yet supported"
 #endif
 
-#include "Core/GeneratedCodeWrapper.h"
+#include <BlockFactory/SimulinkCoder/GeneratedCodeWrapper.h>
 #include "@MDL_NAME@.h"
 
 #include <iostream>
