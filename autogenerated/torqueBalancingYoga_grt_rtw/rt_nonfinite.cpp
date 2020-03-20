@@ -24,8 +24,8 @@
  *      (Inf, NaN and -Inf).
  */
 #include "rt_nonfinite.h"
-#include "rtGetNaN.h"
 #include "rtGetInf.h"
+#include "rtGetNaN.h"
 
 extern "C" {
 real_T rtInf;

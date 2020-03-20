@@ -20,8 +20,8 @@
 
 #ifndef RTW_HEADER_rt_nonfinite_h_
 #define RTW_HEADER_rt_nonfinite_h_
-#include <stddef.h>
 #include "rtwtypes.h"
+#include <stddef.h>
 #ifdef __cplusplus
 
 extern "C" {

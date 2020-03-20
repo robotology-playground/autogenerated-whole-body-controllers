@@ -66,8 +66,8 @@ typedef struct
 
 #endif
 
-#ifndef DEFINED_TYPEDEF_FOR_struct_7ihouVNoAY8wd4f70WjkX_
-#define DEFINED_TYPEDEF_FOR_struct_7ihouVNoAY8wd4f70WjkX_
+#ifndef DEFINED_TYPEDEF_FOR_struct_PVCtHJxBD4q9zoebXEkj_
+#define DEFINED_TYPEDEF_FOR_struct_PVCtHJxBD4q9zoebXEkj_
 
 typedef struct
 {
@@ -91,8 +91,10 @@ typedef struct
     boolean_T demoOnlyBalancing;
     boolean_T demoStartsOnRightSupport;
     boolean_T yogaAlsoOnRightFoot;
-    boolean_T yogaInLoop;
-    boolean_T repeatYogaMoveset;
+    boolean_T twoFeetYogaInLoop;
+    boolean_T oneFootYogaInLoop;
+    real_T yogaCounter;
+    boolean_T repeatTwiceYogaWithDifferentSpeed;
     real_T smoothingTimeSecondYogaLeft;
     real_T smoothingTimeSecondYogaRight;
     real_T joints_references[299];
@@ -100,7 +102,7 @@ typedef struct
     real_T joints_rightYogaRef[624];
     real_T joints_leftSecondYogaRef[26];
     real_T joints_rightSecondYogaRef[26];
-} struct_7ihouVNoAY8wd4f70WjkX;
+} struct_PVCtHJxBD4q9zoebXEkj;
 
 #endif
 
