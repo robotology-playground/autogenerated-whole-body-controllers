@@ -5,11 +5,11 @@
  * granting, nonprofit, educational organizations only. Not for
  * government, commercial, or other organizational use.
  *
- * Code generation for model "torqueBalancingYoga".
+ * Code generation for model "torqueControlBalancing".
  *
- * Model version              : 1.3292
+ * Model version              : 1.3504
  * Simulink Coder version : 8.14 (R2018a) 06-Feb-2018
- * C++ source code generated on : Thu Sep 27 14:38:56 2018
+ * C++ source code generated on : Sat Mar 21 21:12:50 2020
  *
  * Target selection: grt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping

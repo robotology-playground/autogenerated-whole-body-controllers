@@ -1,15 +1,15 @@
 /*
- * rtGetNaN.h
+ * rtwtypes.h
  *
  * Non-Degree Granting Education License -- for use at non-degree
  * granting, nonprofit, educational organizations only. Not for
  * government, commercial, or other organizational use.
  *
- * Code generation for model "torqueBalancingYoga".
+ * Code generation for model "torqueControlBalancing".
  *
- * Model version              : 1.3291
+ * Model version              : 1.3504
  * Simulink Coder version : 8.14 (R2018a) 06-Feb-2018
- * C++ source code generated on : Thu Sep 27 14:12:37 2018
+ * C++ source code generated on : Sat Mar 21 21:12:50 2020
  *
  * Target selection: grt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -18,22 +18,25 @@
  * Validation result: Not run
  */
 
-#ifndef RTW_HEADER_rtGetNaN_h_
-#define RTW_HEADER_rtGetNaN_h_
-#include "rtwtypes.h"
-#include "rt_nonfinite.h"
-#include <stddef.h>
-#ifdef __cplusplus
+#ifndef RTWTYPES_H
+#define RTWTYPES_H
+#include "tmwtypes.h"
+#include "simstruc_types.h"
+#ifndef POINTER_T
+#define POINTER_T
 
-extern "C" {
+typedef void* pointer_T;
 
 #endif
 
-extern real_T rtGetNaN(void);
-extern real32_T rtGetNaNF(void);
-
-#ifdef __cplusplus
-
-} /* extern "C" */
+/* Logical type definitions */
+#if (!defined(__cplusplus))
+#ifndef false
+#define false (0U)
 #endif
-#endif /* RTW_HEADER_rtGetNaN_h_ */
+
+#ifndef true
+#define true (1U)
+#endif
+#endif
+#endif /* RTWTYPES_H */

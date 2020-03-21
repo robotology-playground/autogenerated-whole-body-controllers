@@ -1,3 +1,3 @@
 # Exported controllers
 
-add_subdirectory(torqueBalancingYoga_grt_rtw)
+add_subdirectory(torqueControlBalancing_grt_rtw)

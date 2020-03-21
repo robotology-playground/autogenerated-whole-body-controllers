@@ -1,4 +1,4 @@
-MODEL=torqueBalancingYoga
+MODEL=torqueControlBalancing
 NUMST=2
 NCSTATES=0
 HAVESTDIO
